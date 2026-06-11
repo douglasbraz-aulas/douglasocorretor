@@ -140,11 +140,12 @@
     grid-template-columns: 1fr;
     gap: var(--space-8);
     text-align: center;
+    grid-template-areas: none !important;
   }
 
   .lancamento-secao__content,
   .lancamento-secao__media {
-    grid-area: auto;
+    grid-area: auto !important;
   }
 
   .lancamento-secao__content {
