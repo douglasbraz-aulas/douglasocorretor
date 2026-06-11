@@ -23,10 +23,17 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-12);
   align-items: center;
+  grid-template-areas: "media content";
+}
+
+/* Alternância de lado para desktop (ex: Mooca Heritage) */
+.lancamento-secao--inverter .lancamento-secao__container {
+  grid-template-areas: "content media";
 }
 
 
 .lancamento-secao__media {
+  grid-area: media;
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -46,8 +53,8 @@
   transform: scale(1.05);
 }
 
-/* Conteúdo de Texto */
 .lancamento-secao__content {
+  grid-area: content;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
