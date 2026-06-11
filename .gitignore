@@ -17,3 +17,10 @@ Desktop.ini
 node_modules/
 dist/
 build/
+
+# Local study resources and documentations (not for deploy/github)
+Templates/
+Briefing/
+animacoes-na-pratica/
+*.md
+!README.md
