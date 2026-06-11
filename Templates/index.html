@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Templates prontos para sites de vendas, VSL, pré-avaliação, pré-atendimento e profissional.">
+  <title>Templates — arquivo-base-site</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    .vitrine {
+      min-height: 100vh;
+      padding: var(--space-24) 0 var(--space-16);
+      background: linear-gradient(160deg, #F8FAFC 0%, #EFF6FF 100%);
+    }
+    .vitrine__title {
+      font-size: var(--text-4xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text);
+      margin-bottom: var(--space-3);
+    }
+    .vitrine__subtitle {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-12);
+    }
+
+    /* Categoria */
+    .category-block { margin-bottom: var(--space-14); }
+    .category-block__label {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-primary);
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .category-block__label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    /* Grid */
+    .template-grid {
+      display: grid;
+      gap: var(--space-6);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) {
+      .template-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .template-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* Card */
+    .template-card {
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: box-shadow var(--transition-base), transform var(--transition-base);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .template-card:hover {
+      box-shadow: var(--shadow-xl);
+      transform: translateY(-4px);
+    }
+    .template-card__thumb {
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      font-weight: var(--font-weight-bold);
+      color: rgba(255,255,255,0.9);
+      position: relative;
+      overflow: hidden;
+    }
+    .template-card__thumb-label {
+      position: absolute;
+      bottom: var(--space-2);
+      right: var(--space-3);
+      font-size: 10px;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .template-card__body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      flex: 1;
+    }
+    .template-card__category {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-primary);
+    }
+    .template-card__name {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text);
+    }
+    .template-card__desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: var(--line-height-relaxed);
+      flex: 1;
+    }
+    .template-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-3);
+    }
+    .template-card__tag {
+      font-size: var(--text-xs);
+      background-color: var(--color-bg-muted);
+      color: var(--color-text-muted);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+    }
+    .template-card__arrow {
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="vitrine">
+    <div class="container">
+      <p style="font-size:var(--text-sm);font-weight:600;color:var(--color-primary);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:var(--space-3)">arquivo-base-site</p>
+      <h1 class="vitrine__title">Templates de página</h1>
+      <p class="vitrine__subtitle">20 páginas prontas para personalizar — clique em qualquer card para abrir o template.</p>
+
+      <!-- ── FERRAMENTAS ── -->
+      <div class="category-block">
+        <p class="category-block__label">Ferramentas · 3 templates</p>
+        <div class="template-grid" role="list">
+
+          <a href="../Briefing/briefing-cliente.html" class="template-card" role="listitem" aria-label="Abrir briefing de cliente">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#1D4ED8,#7C3AED)" aria-hidden="true">
+              📋
+              <span class="template-card__thumb-label">Briefing</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Ferramenta</p>
+              <h2 class="template-card__name">Briefing de Cliente</h2>
+              <p class="template-card__desc">Formulário de design system para enviar ao cliente: paleta completa (7 cores), fontes, estilo visual e planejamento. Respostas chegam pelo WhatsApp. Exporta PDF ao final.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Design System</span>
+                <span class="template-card__tag">5 seções</span>
+                <span class="template-card__tag">PDF</span>
+              </div>
+              <p class="template-card__arrow">Abrir formulário →</p>
+            </div>
+          </a>
+
+          <a href="../Briefing/briefing-proprio-site.html" class="template-card" role="listitem" aria-label="Abrir briefing para o próprio site">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#0F766E,#0369A1)" aria-hidden="true">
+              🖥️
+              <span class="template-card__thumb-label">Auto</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Ferramenta</p>
+              <h2 class="template-card__name">Briefing — Meu Próprio Site</h2>
+              <p class="template-card__desc">Para quem desenvolve o próprio site. Define paleta (7 cores), estilo visual, fontes e inclui seção técnica exclusiva: tecnologia, hospedagem, responsividade e acessibilidade. Exporta PDF.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Auto-dev</span>
+                <span class="template-card__tag">6 seções</span>
+                <span class="template-card__tag">PDF</span>
+              </div>
+              <p class="template-card__arrow">Abrir formulário →</p>
+            </div>
+          </a>
+
+          <a href="../animacoes-na-pratica/index.html" class="template-card" role="listitem" aria-label="Ver biblioteca de animações" style="max-width:420px">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#7C3AED,#EC4899)" aria-hidden="true">
+              ✨
+              <span class="template-card__thumb-label">Animações</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Ferramenta</p>
+              <h2 class="template-card__name">Animações na Prática</h2>
+              <p class="template-card__desc">Biblioteca visual com todas as classes de animação — scroll reveal, hover, contínuas e skeleton. Veja ao vivo e copie a classe.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Scroll Reveal</span>
+                <span class="template-card__tag">Hover</span>
+                <span class="template-card__tag">Referência</span>
+              </div>
+              <p class="template-card__arrow">Ver animações →</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── PÁGINAS DE VENDAS ── -->
+      <div class="category-block">
+        <p class="category-block__label">Páginas de Vendas · 9 templates</p>
+        <div class="template-grid" role="list">
+
+          <a href="vsl.html" class="template-card" role="listitem" aria-label="Abrir template VSL">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#0F172A,#1E293B)" aria-hidden="true">
+              ▶
+              <span class="template-card__thumb-label">Dark</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas</p>
+              <h2 class="template-card__name">Página VSL</h2>
+              <p class="template-card__desc">Video Sales Letter com player em destaque, bullets de benefícios, bônus, garantia e contador de urgência.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Vídeo</span>
+                <span class="template-card__tag">Bônus</span>
+                <span class="template-card__tag">Countdown</span>
+                <span class="template-card__tag">Dark</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas.html" class="template-card" role="listitem" aria-label="Abrir template Sales Page Clássica">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#1D4ED8,#3B82F6)" aria-hidden="true">
+              📈
+              <span class="template-card__thumb-label">Azul / Claro</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas</p>
+              <h2 class="template-card__name">Vendas Clássica</h2>
+              <p class="template-card__desc">Sales page completa: hero, problema, solução, benefícios, como funciona, depoimentos, preço, FAQ e garantia.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">10 seções</span>
+                <span class="template-card__tag">FAQ</span>
+                <span class="template-card__tag">Preço</span>
+                <span class="template-card__tag">Claro</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-dark.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Dark">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#080C14,#1E1B4B)" aria-hidden="true">
+              💎
+              <span class="template-card__thumb-label">Dark Total</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Dark</h2>
+              <p class="template-card__desc">Tema escuro total com gradiente indigo, cards com glow border, botões com sombra colorida e tipografia premium.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Dark</span>
+                <span class="template-card__tag">Glow</span>
+                <span class="template-card__tag">Premium</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-intercalada.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Intercalada">
+            <div class="template-card__thumb" aria-hidden="true" style="background:linear-gradient(135deg,#1D4ED8 0%,#1D4ED8 33%,#0F172A 33%,#0F172A 66%,#3730A3 66%,#3730A3 100%)">
+              🎨
+              <span class="template-card__thumb-label">Alternado</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Intercalada</h2>
+              <p class="template-card__desc">Seções alternando entre branco, escuro e indigo com wave SVG como dividers entre as transições de cor.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Wave</span>
+                <span class="template-card__tag">Intercalado</span>
+                <span class="template-card__tag">Dinâmico</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-bold.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Bold">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#F97316,#FACC15)" aria-hidden="true">
+              🔥
+              <span class="template-card__thumb-label">Bold / Vibrante</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Bold</h2>
+              <p class="template-card__desc">Tipografia gigante (900 weight), laranja e amarelo, seção de stats em fundo laranja, botões exagerados com sombra forte.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Bold</span>
+                <span class="template-card__tag">Laranja</span>
+                <span class="template-card__tag">Impacto</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-minimal.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Minimal">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#FAF9F6,#F0EDE8);display:flex;flex-direction:column;gap:4px;" aria-hidden="true">
+              <span style="color:#1A1A1A;font-family:Georgia,serif;font-style:italic;font-size:1.6rem;font-weight:400">Essencial</span>
+              <span style="color:#6B6B6B;font-size:0.55rem;font-weight:600;text-transform:uppercase;letter-spacing:0.15em">Editorial / Minimal</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Minimal</h2>
+              <p class="template-card__desc">Fundo bege off-white, Playfair Display para títulos, depoimentos em pull quote e muito whitespace — estilo editorial premium.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Serif</span>
+                <span class="template-card__tag">Editorial</span>
+                <span class="template-card__tag">Premium</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-glass.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Glass">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#0D0F1A,#1E293B);position:relative;overflow:hidden" aria-hidden="true">
+              <span style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(34,211,238,0.3) 0%,transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(129,140,248,0.25) 0%,transparent 60%)"></span>
+              <span style="position:relative;z-index:1;font-size:2.25rem">✦</span>
+              <span class="template-card__thumb-label" style="z-index:1">Glass / Mesh</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Glass</h2>
+              <p class="template-card__desc">Gradient mesh escuro como fundo fixo, cards com backdrop-filter blur, header glassmorphism e botões com gradiente cyan-violet.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Glass</span>
+                <span class="template-card__tag">Mesh</span>
+                <span class="template-card__tag">Tech</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-futurista.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Futurista">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#050816,#0D1526);position:relative;overflow:hidden" aria-hidden="true">
+              <span style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(168,85,247,0.2) 0%,transparent 65%)"></span>
+              <span style="position:relative;z-index:1;font-size:2rem;color:#00FFFF;text-shadow:0 0 20px rgba(0,255,255,.6)">⚡</span>
+              <span class="template-card__thumb-label" style="z-index:1;color:rgba(0,255,255,.7)">Neon / Futurista</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Futurista</h2>
+              <p class="template-card__desc">Deep dark com neon cyan e electric purple, grade de fundo animada, borders com glow, dashboard fictício no hero e planos com efeito glow. Demo: NexusAI.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Neon</span>
+                <span class="template-card__tag">SaaS</span>
+                <span class="template-card__tag">Tech</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="vendas-lifestyle.html" class="template-card" role="listitem" aria-label="Abrir template Vendas Lifestyle">
+            <div class="template-card__thumb" style="background:linear-gradient(160deg,#F5ECD8,#FDF8F0)" aria-hidden="true">
+              <span style="font-size:2rem">🌿</span>
+              <span class="template-card__thumb-label" style="color:rgba(107,66,38,0.7)">Cream · Orgânico</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Vendas · Variação</p>
+              <h2 class="template-card__name">Vendas Lifestyle</h2>
+              <p class="template-card__desc">Cream e tons terrosos com fonte Playfair Display, layout acolhedor e orgânico, selo de garantia e seção de oferta estruturada. Demo: Nutrir & Florescer.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Serif</span>
+                <span class="template-card__tag">Wellness</span>
+                <span class="template-card__tag">Orgânico</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── PÁGINA PROFISSIONAL ── -->
+      <div class="category-block">
+        <p class="category-block__label">Página Profissional · 6 templates</p>
+        <div class="template-grid" role="list">
+
+          <a href="profissional.html" class="template-card" role="listitem" aria-label="Abrir template Profissional Médico">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#064E3B,#065F46)" aria-hidden="true">
+              👩‍⚕️
+              <span class="template-card__thumb-label">Verde · Saúde</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Profissional · Saúde</p>
+              <h2 class="template-card__name">Médico / Saúde</h2>
+              <p class="template-card__desc">Hero + foto, números, bio com credenciais, especialidades, como funciona, depoimentos, convênios, FAQ e CTA. Demo: Dra. Ana Costa, Cardiologista.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Convênios</span>
+                <span class="template-card__tag">FAQ</span>
+                <span class="template-card__tag">9 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="profissional-personal-trainer.html" class="template-card" role="listitem" aria-label="Abrir template Personal Trainer">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#0F172A,#431407)" aria-hidden="true">
+              🏋️
+              <span class="template-card__thumb-label">Dark · Laranja</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Profissional · Fitness</p>
+              <h2 class="template-card__name">Personal Trainer</h2>
+              <p class="template-card__desc">Tema dark energético com programas (emagrecimento, hipertrofia, performance), processo em 4 etapas e depoimentos com resultados mensuráveis.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Programas</span>
+                <span class="template-card__tag">Dark</span>
+                <span class="template-card__tag">8 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="profissional-psicologo.html" class="template-card" role="listitem" aria-label="Abrir template Psicólogo">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#F5F3FF,#DDD6FE)" aria-hidden="true">
+              <span style="font-size:2rem">🧠</span>
+              <span class="template-card__thumb-label" style="color:rgba(91,33,182,0.8)">Roxo · Acolhedor</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Profissional · Saúde Mental</p>
+              <h2 class="template-card__name">Psicólogo / Terapeuta</h2>
+              <p class="template-card__desc">Tema claro e acolhedor com abordagens terapêuticas, como funciona, FAQ com sigilo e LGPD. Demo: Dra. Sofia Ramos, psicóloga clínica e de casais.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Casais</span>
+                <span class="template-card__tag">Online</span>
+                <span class="template-card__tag">8 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="profissional-nutricionista.html" class="template-card" role="listitem" aria-label="Abrir template Nutricionista">
+            <div class="template-card__thumb" style="background:linear-gradient(160deg,#F0FDF4,#DCFCE7)" aria-hidden="true">
+              <span style="font-size:2rem">🥗</span>
+              <span class="template-card__thumb-label" style="color:rgba(21,128,61,0.8)">Verde · Clean</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Profissional · Nutrição</p>
+              <h2 class="template-card__name">Nutricionista</h2>
+              <p class="template-card__desc">Fundo verde suave com especialidades (clínica, esportiva, vegan), processo em 4 etapas e depoimentos com resultados reais. Demo: Dra. Paula Mendes.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Esportiva</span>
+                <span class="template-card__tag">Clínica</span>
+                <span class="template-card__tag">7 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="profissional-arquiteto.html" class="template-card" role="listitem" aria-label="Abrir template Arquiteto">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#1C1917,#78350F)" aria-hidden="true">
+              📐
+              <span class="template-card__thumb-label">Dark · Terra</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Profissional · Arquitetura</p>
+              <h2 class="template-card__name">Arquiteto / Designer</h2>
+              <p class="template-card__desc">Estilo editorial e sofisticado com grid de portfólio, serviços, processo do briefing à entrega e depoimentos por projeto. Demo: Marina Rocha.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Portfólio</span>
+                <span class="template-card__tag">Editorial</span>
+                <span class="template-card__tag">8 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="profissional-fotografo.html" class="template-card" role="listitem" aria-label="Abrir template Fotógrafo">
+            <div class="template-card__thumb" style="background:#0A0A0A;position:relative;overflow:hidden" aria-hidden="true">
+              <span style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.15) 0%,transparent 60%)"></span>
+              <span style="position:relative;z-index:1;font-size:2rem">📷</span>
+              <span class="template-card__thumb-label" style="z-index:1;color:rgba(201,168,76,.8)">Ultra Dark · Dourado</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Profissional · Fotografia</p>
+              <h2 class="template-card__name">Fotógrafo</h2>
+              <p class="template-card__desc">Ultra dark com acento dourado, hero em grid 3 colunas full-screen, header flutuante com blur, portfólio masonry, serviços com cards bordeaux e depoimentos dark.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Portfólio</span>
+                <span class="template-card__tag">Dark</span>
+                <span class="template-card__tag">7 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── PÁGINA INSTITUCIONAL ── -->
+      <div class="category-block">
+        <p class="category-block__label">Página Institucional · 2 templates</p>
+        <div class="template-grid" role="list">
+
+          <a href="institucional.html" class="template-card" role="listitem" aria-label="Abrir template Institucional">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#0F172A,#1E3A8A);position:relative;overflow:hidden" aria-hidden="true">
+              <span style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(29,78,216,0.4),transparent 60%)"></span>
+              <span style="position:relative;font-size:2rem;z-index:1">🏢</span>
+              <span class="template-card__thumb-label" style="z-index:1">Corporativo · Azul</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Institucional · Empresa</p>
+              <h2 class="template-card__name">Página Institucional</h2>
+              <p class="template-card__desc">Hero com visual de dashboard, sobre e valores, soluções em grid, time de liderança, logos de clientes, depoimentos e bloco de contato completo. Demo: Nexo Soluções.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Time</span>
+                <span class="template-card__tag">Clientes</span>
+                <span class="template-card__tag">Contato</span>
+                <span class="template-card__tag">8 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="institucional-agencia.html" class="template-card" role="listitem" aria-label="Abrir template Institucional Agência">
+            <div class="template-card__thumb" style="background:#0A0A0A;position:relative;overflow:hidden" aria-hidden="true">
+              <span style="position:absolute;top:8px;left:12px;width:24px;height:24px;border-radius:50%;background:#F5E642"></span>
+              <span style="position:absolute;top:8px;left:42px;width:24px;height:24px;border-radius:50%;background:#FF3B30"></span>
+              <span style="position:absolute;top:8px;left:72px;width:24px;height:24px;border-radius:50%;background:#0066FF"></span>
+              <span style="position:relative;z-index:1;font-size:2rem;margin-top:1.5rem">🎨</span>
+              <span class="template-card__thumb-label" style="z-index:1;color:rgba(255,255,255,.6)">Preto · Colorido</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Institucional · Agência</p>
+              <h2 class="template-card__name">Agência Criativa</h2>
+              <p class="template-card__desc">Branco e preto com acentos coloridos (amarelo, azul, vermelho), tipografia bold gigante, grid de serviços editorial, cases de sucesso, processo e formulário embutido. Demo: Forma Studio.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Bold</span>
+                <span class="template-card__tag">Cases</span>
+                <span class="template-card__tag">7 seções</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── FORMULÁRIOS PRÉ-ATENDIMENTO ── -->
+      <div class="category-block">
+        <p class="category-block__label">Formulários / Pré-Atendimento · 6 templates</p>
+        <div class="template-grid" role="list">
+
+          <a href="pre-avaliacao.html" class="template-card" role="listitem" aria-label="Abrir template Pré-Avaliação">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#7C3AED,#5B21B6)" aria-hidden="true">
+              📋
+              <span class="template-card__thumb-label">Qualificação</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Formulário</p>
+              <h2 class="template-card__name">Pré-Avaliação</h2>
+              <p class="template-card__desc">Formulário de qualificação de lead para ofertas premium. Coleta situação, objetivo, investimento e disponibilidade — envia para WhatsApp.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Qualificação</span>
+                <span class="template-card__tag">WhatsApp</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="corretor.html" class="template-card" role="listitem" aria-label="Abrir template Pré-Atendimento Corretores">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#D97706,#B45309)" aria-hidden="true">
+              🏠
+              <span class="template-card__thumb-label">Imóveis</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Pré-Atendimento</p>
+              <h2 class="template-card__name">Corretor de Imóveis</h2>
+              <p class="template-card__desc">Formulário imobiliário: tipo de imóvel, finalidade, faixa de valor, região e prazo desejado. Envia para WhatsApp.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Imóveis</span>
+                <span class="template-card__tag">Triagem</span>
+                <span class="template-card__tag">WhatsApp</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="advogado.html" class="template-card" role="listitem" aria-label="Abrir template Pré-Atendimento Advogados">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#1E293B,#0F172A)" aria-hidden="true">
+              ⚖️
+              <span class="template-card__thumb-label">Jurídico</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Pré-Atendimento</p>
+              <h2 class="template-card__name">Advogado / Escritório</h2>
+              <p class="template-card__desc">Formulário jurídico: área do direito, descrição do caso, urgência e modalidade. Sigilo total + LGPD.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Jurídico</span>
+                <span class="template-card__tag">Sigilo</span>
+                <span class="template-card__tag">WhatsApp</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="medico.html" class="template-card" role="listitem" aria-label="Abrir template Pré-Consulta Médico">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#064E3B,#065F46)" aria-hidden="true">
+              🩺
+              <span class="template-card__thumb-label">Saúde</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Pré-Atendimento</p>
+              <h2 class="template-card__name">Médico / Consultório</h2>
+              <p class="template-card__desc">Pré-consulta médica: motivo, sintomas, histórico cardiovascular, plano de saúde e preferência de horário. LGPD.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Saúde</span>
+                <span class="template-card__tag">LGPD</span>
+                <span class="template-card__tag">WhatsApp</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="formulario-split.html" class="template-card" role="listitem" aria-label="Abrir template Formulário Split">
+            <div class="template-card__thumb" style="background:linear-gradient(90deg,#0F1622 50%,#F7F9FC 50%)" aria-hidden="true">
+              <span style="font-size:1.875rem">↔</span>
+              <span class="template-card__thumb-label" style="color:rgba(255,255,255,.6)">Split · Dark / Branco</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Formulário · Layout</p>
+              <h2 class="template-card__name">Formulário Split</h2>
+              <p class="template-card__desc">Layout 50/50 com painel esquerdo dark (benefícios + depoimento + stats) e painel direito branco com formulário. Ideal para consultorias e captações de lead premium.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Split</span>
+                <span class="template-card__tag">Consultoria</span>
+                <span class="template-card__tag">WhatsApp</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+          <a href="formulario-quiz.html" class="template-card" role="listitem" aria-label="Abrir template Formulário Quiz">
+            <div class="template-card__thumb" style="background:linear-gradient(135deg,#EDE9FE,#F5F3FF)" aria-hidden="true">
+              <span style="font-size:1.875rem;color:#7C3AED">❓</span>
+              <span class="template-card__thumb-label" style="color:rgba(124,58,237,.7)">Quiz · Funil</span>
+            </div>
+            <div class="template-card__body">
+              <p class="template-card__category">Formulário · Quiz</p>
+              <h2 class="template-card__name">Formulário Quiz</h2>
+              <p class="template-card__desc">Fluxo de quiz em 5 etapas com barra de progresso, radio-cards clicáveis e resultado personalizado com plano recomendado. Tudo em JavaScript puro, sem dependências.</p>
+              <div class="template-card__tags">
+                <span class="template-card__tag">Quiz</span>
+                <span class="template-card__tag">Funil</span>
+                <span class="template-card__tag">Progress bar</span>
+              </div>
+              <p class="template-card__arrow">Ver template →</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Instruções -->
+      <div style="margin-top:var(--space-8);padding:var(--space-8);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);max-width:720px">
+        <h2 style="font-size:var(--text-xl);font-weight:700;margin-bottom:var(--space-4);color:var(--color-text)">Como usar os templates</h2>
+        <ol style="display:flex;flex-direction:column;gap:var(--space-3);padding-left:var(--space-6);list-style:decimal">
+          <li style="font-size:var(--text-sm);color:var(--color-text-muted)">Copie o arquivo <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">.html</code> desejado e renomeie conforme o projeto.</li>
+          <li style="font-size:var(--text-sm);color:var(--color-text-muted)">Substitua <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">5511999999999</code> pelo número real com DDI+DDD (sem espaços ou traços).</li>
+          <li style="font-size:var(--text-sm);color:var(--color-text-muted)">Edite textos, cores e identidade visual conforme o briefing do cliente.</li>
+          <li style="font-size:var(--text-sm);color:var(--color-text-muted)">Troque os <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">.img-placeholder</code> pelas fotos reais — prefira <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">.webp</code>.</li>
+          <li style="font-size:var(--text-sm);color:var(--color-text-muted)">Siga os protocolos <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">SEO.md</code>, <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">ANALYTICS.md</code> e <code style="background:var(--color-bg-muted);padding:2px 6px;border-radius:4px;font-size:0.8em">ACESSIBILIDADE.md</code> antes do deploy.</li>
+        </ol>
+      </div>
+
+    </div>
+  </main>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

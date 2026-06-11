@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Essencial — Consultoria Premium. Clareza estratégica para líderes e empresas que querem crescer com intenção.">
+  <meta property="og:title" content="Essencial — Consultoria Estratégica Premium">
+  <meta property="og:type" content="website">
+  <title>Essencial — Consultoria Premium</title>
+  <!-- Playfair Display para títulos editoriais -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── Tokens Essencial ── */
+    :root {
+      --es-cream:   #FAF9F6;
+      --es-beige:   #F0EDE8;
+      --es-text:    #1A1A1A;
+      --es-muted:   #6B6B6B;
+      --es-accent:  #1A1A1A;
+      --es-gold:    #B8860B;
+      --es-divider: #D4CFC8;
+    }
+
+    body {
+      background: var(--es-cream);
+      color: var(--es-text);
+      font-family: 'Inter', sans-serif;
+    }
+
+    h1, h2, h3, .serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* ── Header editorial ── */
+    .header--es {
+      background: var(--es-cream);
+      border-bottom: 1px solid var(--es-divider);
+    }
+    .header--es .header__logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      color: var(--es-text);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+    .btn--es {
+      background: transparent;
+      color: var(--es-text);
+      border: 1px solid var(--es-text);
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: var(--space-2) var(--space-5);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: background var(--transition-base), color var(--transition-base);
+    }
+    .btn--es:hover { background: var(--es-text); color: #FFFFFF; }
+    .btn--es--filled {
+      background: var(--es-text);
+      color: #FFFFFF;
+    }
+    .btn--es--filled:hover { background: #333333; color: #FFFFFF; }
+
+    /* ── Hero editorial ── */
+    .hero-es {
+      background: var(--es-cream);
+      padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-20);
+    }
+    .hero-es__layout {
+      display: grid;
+      gap: var(--space-16);
+      align-items: end;
+    }
+    @media (min-width: 768px) {
+      .hero-es__layout { grid-template-columns: 1fr 340px; }
+    }
+    .hero-es__category {
+      font-family: 'Inter', sans-serif;
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--es-muted);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .hero-es__category::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--es-muted);
+    }
+    .hero-es__title {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 600;
+      color: var(--es-text);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-8);
+    }
+    .hero-es__title em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--es-gold);
+    }
+    .hero-es__text {
+      font-size: var(--text-lg);
+      color: var(--es-muted);
+      line-height: var(--line-height-relaxed);
+      max-width: 480px;
+      margin-bottom: var(--space-8);
+    }
+    .hero-es__ctas { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+    .hero-es__meta {
+      border-top: 1px solid var(--es-divider);
+      padding-top: var(--space-8);
+    }
+    .hero-es__meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .hero-es__meta-item {}
+    .hero-es__meta-label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--es-muted);
+      margin-bottom: var(--space-1);
+    }
+    .hero-es__meta-value {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-xl);
+      color: var(--es-text);
+    }
+
+    /* ── Divider ── */
+    .es-divider {
+      border: none;
+      border-top: 1px solid var(--es-divider);
+      margin: 0;
+    }
+
+    /* ── Problema editorial ── */
+    .problema-es {
+      background: var(--es-beige);
+      padding: var(--space-20) 0;
+    }
+    .problema-es__layout {
+      display: grid;
+      gap: var(--space-12);
+    }
+    @media (min-width: 768px) { .problema-es__layout { grid-template-columns: 220px 1fr; } }
+    .problema-es__side-label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--es-muted);
+      padding-top: var(--space-2);
+    }
+    .problema-es__content {}
+    .problema-es__title {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 600;
+      color: var(--es-text);
+      line-height: 1.2;
+      margin-bottom: var(--space-8);
+      max-width: 580px;
+    }
+    .problema-es__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-0);
+    }
+    .problema-es__item {
+      padding: var(--space-5) 0;
+      border-bottom: 1px solid var(--es-divider);
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+    .problema-es__item:first-child { border-top: 1px solid var(--es-divider); }
+    .problema-es__num {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-sm);
+      color: var(--es-muted);
+      flex-shrink: 0;
+      width: 24px;
+    }
+    .problema-es__item-text {
+      font-size: var(--text-base);
+      color: var(--es-text);
+      line-height: var(--line-height-relaxed);
+    }
+    .problema-es__item-text strong { font-weight: var(--font-weight-semibold); }
+
+    /* ── Sobre ── */
+    .sobre-es {
+      padding: var(--space-24) 0;
+    }
+    .sobre-es__layout {
+      display: grid;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    @media (min-width: 768px) { .sobre-es__layout { grid-template-columns: 1fr 360px; } }
+    .sobre-es__eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--es-muted);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .sobre-es__eyebrow::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--es-muted);
+    }
+    .sobre-es__title {
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.15;
+      margin-bottom: var(--space-6);
+    }
+    .sobre-es__body {
+      color: var(--es-muted);
+      line-height: var(--line-height-relaxed);
+      font-size: var(--text-base);
+      margin-bottom: var(--space-5);
+    }
+    .sobre-es__credentials {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-top: var(--space-8);
+    }
+    .sobre-es__cred {
+      font-size: var(--text-sm);
+      color: var(--es-muted);
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+    .sobre-es__cred::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--es-gold);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── Pull quotes (depoimentos) ── */
+    .dep-es {
+      background: var(--es-beige);
+      padding: var(--space-20) 0;
+    }
+    .dep-es__eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--es-muted);
+      margin-bottom: var(--space-16);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .dep-es__eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--es-muted); }
+    .dep-es__list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-0);
+    }
+    .dep-es__item {
+      padding: var(--space-8) 0;
+      border-bottom: 1px solid var(--es-divider);
+      display: grid;
+      gap: var(--space-6);
+    }
+    .dep-es__item:first-child { border-top: 1px solid var(--es-divider); }
+    @media (min-width: 768px) { .dep-es__item { grid-template-columns: 1fr 200px; gap: var(--space-12); } }
+    .dep-es__quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-style: italic;
+      color: var(--es-text);
+      line-height: 1.5;
+    }
+    .dep-es__quote::before { content: '"'; }
+    .dep-es__quote::after  { content: '"'; }
+    .dep-es__author {}
+    .dep-es__name {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--es-text);
+    }
+    .dep-es__role { font-size: var(--text-xs); color: var(--es-muted); margin-top: var(--space-1); }
+    .dep-es__company { font-size: var(--text-xs); color: var(--es-muted); }
+
+    /* ── Processo ── */
+    .processo-es { padding: var(--space-24) 0; }
+    .processo-es__eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--es-muted);
+      margin-bottom: var(--space-10);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .processo-es__eyebrow::before { content: ''; width: 32px; height: 1px; background: var(--es-muted); }
+    .processo-es__title {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 600;
+      max-width: 560px;
+      line-height: 1.15;
+      margin-bottom: var(--space-12);
+    }
+    .processo-es__steps {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-0);
+      max-width: 680px;
+    }
+    .processo-es__step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: var(--space-6);
+      padding: var(--space-7) 0;
+      border-bottom: 1px solid var(--es-divider);
+      align-items: start;
+    }
+    .processo-es__step:first-child { border-top: 1px solid var(--es-divider); }
+    .processo-es__step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--es-divider);
+      line-height: 1;
+      font-weight: 600;
+    }
+    .processo-es__step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--text-xl);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+    .processo-es__step-text { font-size: var(--text-sm); color: var(--es-muted); line-height: var(--line-height-relaxed); }
+
+    /* ── Investimento ── */
+    .invest-es {
+      background: var(--es-text);
+      color: #FFFFFF;
+      padding: var(--space-20) 0;
+    }
+    .invest-es__layout {
+      display: grid;
+      gap: var(--space-12);
+      align-items: start;
+    }
+    @media (min-width: 768px) { .invest-es__layout { grid-template-columns: 1fr 360px; } }
+    .invest-es__eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: var(--space-5);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .invest-es__eyebrow::before { content: ''; width: 32px; height: 1px; background: rgba(255,255,255,0.3); }
+    .invest-es__title {
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: var(--space-6);
+    }
+    .invest-es__text { color: rgba(255,255,255,0.55); line-height: var(--line-height-relaxed); margin-bottom: var(--space-8); }
+    .invest-es__includes {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .invest-es__include {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,0.65);
+    }
+    .invest-es__include::before {
+      content: '—';
+      color: var(--es-gold);
+      flex-shrink: 0;
+    }
+
+    .invest-es__card {
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+    }
+    .invest-es__card-eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: var(--space-4);
+    }
+    .invest-es__price {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+    .invest-es__price span { font-size: var(--text-lg); font-weight: 400; color: rgba(255,255,255,0.4); font-family: 'Inter', sans-serif; }
+    .invest-es__installment { font-size: var(--text-sm); color: rgba(255,255,255,0.4); margin: var(--space-2) 0 var(--space-8); }
+    .invest-es__divider { height: 1px; background: rgba(255,255,255,0.1); margin: var(--space-6) 0; }
+    .invest-es__note { font-size: var(--text-xs); color: rgba(255,255,255,0.3); line-height: var(--line-height-relaxed); margin-top: var(--space-4); }
+
+    /* ── CTA final ── */
+    .cta-es { padding: var(--space-24) 0; background: var(--es-cream); text-align: center; }
+    .cta-es__eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--es-muted);
+      margin-bottom: var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+    }
+    .cta-es__eyebrow::before,
+    .cta-es__eyebrow::after { content: ''; width: 32px; height: 1px; background: var(--es-divider); }
+    .cta-es__title {
+      font-size: clamp(1.75rem, 4vw, 3.5rem);
+      font-weight: 600;
+      max-width: 600px;
+      margin: 0 auto var(--space-3);
+      line-height: 1.15;
+    }
+    .cta-es__title em { font-style: italic; font-weight: 400; color: var(--es-gold); }
+    .cta-es__sub { color: var(--es-muted); margin-bottom: var(--space-8); font-size: var(--text-base); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--solid header--es" role="banner">
+    <div class="header__inner">
+      <a href="#" class="header__logo" aria-label="Essencial Consultoria — Página inicial">
+        Essencial
+      </a>
+      <a
+        href="#investimento"
+        class="btn--es"
+        aria-label="Ir para o investimento"
+      >
+        Solicitar proposta
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-es" aria-labelledby="hero-titulo">
+      <div class="container">
+        <div class="hero-es__layout">
+          <div>
+            <p class="hero-es__category">Consultoria Estratégica</p>
+            <h1 class="hero-es__title" id="hero-titulo">
+              Clareza para crescer<br><em>com intenção.</em>
+            </h1>
+            <p class="hero-es__text">
+              Para líderes e empresas que sabem aonde querem chegar — mas precisam de alguém que já percorreu esse caminho.
+            </p>
+            <div class="hero-es__ctas">
+              <a href="#investimento" class="btn--es btn--es--filled">Solicitar proposta</a>
+              <a href="#processo" class="btn--es">Como funciona</a>
+            </div>
+          </div>
+          <div class="hero-es__meta">
+            <div class="hero-es__meta-list">
+              <div class="hero-es__meta-item">
+                <p class="hero-es__meta-label">Clientes atendidos</p>
+                <p class="hero-es__meta-value">200+</p>
+              </div>
+              <div class="hero-es__meta-item">
+                <p class="hero-es__meta-label">Anos no mercado</p>
+                <p class="hero-es__meta-value">14</p>
+              </div>
+              <div class="hero-es__meta-item">
+                <p class="hero-es__meta-label">Média de avaliação</p>
+                <p class="hero-es__meta-value">9.8 / 10</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="es-divider">
+
+    <!-- PROBLEMA -->
+    <section class="problema-es" aria-labelledby="prob-titulo">
+      <div class="container">
+        <div class="problema-es__layout">
+          <div>
+            <p class="problema-es__side-label">O contexto</p>
+          </div>
+          <div class="problema-es__content">
+            <h2 class="problema-es__title" id="prob-titulo">Crescer sem clareza é a forma mais cara de avançar</h2>
+            <div class="problema-es__list">
+              <div class="problema-es__item">
+                <span class="problema-es__num">01</span>
+                <p class="problema-es__item-text"><strong>Estratégia vira tática urgente.</strong> Sem uma visão clara, cada semana é uma resposta a fogo — não a uma escolha.</p>
+              </div>
+              <div class="problema-es__item">
+                <span class="problema-es__num">02</span>
+                <p class="problema-es__item-text"><strong>O time não sabe para onde vai.</strong> Quando o líder não articula o destino, o esforço da equipe se dispersa.</p>
+              </div>
+              <div class="problema-es__item">
+                <span class="problema-es__num">03</span>
+                <p class="problema-es__item-text"><strong>Crescimento sem estrutura quebra.</strong> Escalar um negócio sem processos claros amplifica os problemas, não os resolve.</p>
+              </div>
+              <div class="problema-es__item">
+                <span class="problema-es__num">04</span>
+                <p class="problema-es__item-text"><strong>Decisões tomadas com medo.</strong> Falta de clareza gera hesitação — e hesitação tem um custo de oportunidade enorme.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOBRE -->
+    <section class="sobre-es" aria-labelledby="sobre-titulo">
+      <div class="container">
+        <div class="sobre-es__layout">
+          <div>
+            <p class="sobre-es__eyebrow">Quem conduz</p>
+            <h2 class="sobre-es__title" id="sobre-titulo">Fernanda Luz — Consultora Estratégica</h2>
+            <p class="sobre-es__body">Passei 12 anos dentro de empresas como diretora de crescimento antes de fundar a Essencial. Trabalhei com empresas de R$ 500 mil a R$ 80 milhões de faturamento — e aprendi que crescimento sustentável não vem de hacks, mas de decisões bem fundamentadas.</p>
+            <p class="sobre-es__body">A Essencial existe para dar a líderes o que eu queria ter tido: um parceiro estratégico que fala direto, sem consultês, sem relatórios que ninguém lê.</p>
+            <div class="sobre-es__credentials">
+              <p class="sobre-es__cred">MBA em Estratégia Empresarial — FGV</p>
+              <p class="sobre-es__cred">Ex-diretora de crescimento em 3 startups (2 delas adquiridas)</p>
+              <p class="sobre-es__cred">Professora convidada — HSM Management</p>
+              <p class="sobre-es__cred">200+ empresas atendidas em 14 anos</p>
+            </div>
+          </div>
+          <div class="img-placeholder img-placeholder--portrait" role="img" aria-label="Foto da consultora Fernanda Luz — substituir pela foto real">
+            <svg class="img-placeholder__icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+            <span class="img-placeholder__label">Fernanda Luz<br>3:4 · Substituir pela foto real</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS (pull quote) -->
+    <section class="dep-es" aria-labelledby="dep-titulo">
+      <div class="container">
+        <p class="dep-es__eyebrow" id="dep-titulo">O que dizem</p>
+        <div class="dep-es__list">
+          <div class="dep-es__item">
+            <p class="dep-es__quote">Três meses de trabalho com a Fernanda fizeram mais pela nossa estratégia do que dois anos com uma consultoria de nome. Ela é direta, profunda e sem enrolação.</p>
+            <div class="dep-es__author">
+              <p class="dep-es__name">André Villela</p>
+              <p class="dep-es__role">CEO · Construtech</p>
+              <p class="dep-es__company">R$ 12M em faturamento</p>
+            </div>
+          </div>
+          <div class="dep-es__item">
+            <p class="dep-es__quote">O trabalho de clareza de posicionamento que fizemos juntos foi transformador. Sabíamos o que vendíamos — mas não conseguíamos explicar por que somos diferentes. Agora conseguimos.</p>
+            <div class="dep-es__author">
+              <p class="dep-es__name">Carla Britto</p>
+              <p class="dep-es__role">Sócia Fundadora · StudioCB</p>
+              <p class="dep-es__company">Arquitetura corporativa</p>
+            </div>
+          </div>
+          <div class="dep-es__item">
+            <p class="dep-es__quote">Ela não vende diagnóstico vago. Em dois encontros já tínhamos um plano de 90 dias com métricas concretas. É raro encontrar isso no mercado.</p>
+            <div class="dep-es__author">
+              <p class="dep-es__name">Felipe Nogueira</p>
+              <p class="dep-es__role">Diretor Comercial · Ativa S.A.</p>
+              <p class="dep-es__company">Distribuição B2B</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESSO -->
+    <section id="processo" class="processo-es" aria-labelledby="proc-titulo">
+      <div class="container">
+        <p class="processo-es__eyebrow">Como funciona</p>
+        <h2 class="processo-es__title" id="proc-titulo">Um processo construído para gerar clareza rápida e resultado real</h2>
+        <div class="processo-es__steps">
+          <div class="processo-es__step">
+            <span class="processo-es__step-num">01</span>
+            <div>
+              <h3 class="processo-es__step-title">Diagnóstico profundo</h3>
+              <p class="processo-es__step-text">Duas sessões de imersão para entender o negócio, os gargalos reais e o que está sendo evitado. Sem questionário genérico — conversa estratégica direta.</p>
+            </div>
+          </div>
+          <div class="processo-es__step">
+            <span class="processo-es__step-num">02</span>
+            <div>
+              <h3 class="processo-es__step-title">Mapa estratégico</h3>
+              <p class="processo-es__step-text">Entrego um documento de uma página com clareza de destino, 3 prioridades críticas e os critérios de decisão para os próximos 90 dias.</p>
+            </div>
+          </div>
+          <div class="processo-es__step">
+            <span class="processo-es__step-num">03</span>
+            <div>
+              <h3 class="processo-es__step-title">Acompanhamento quinzenal</h3>
+              <p class="processo-es__step-text">Sessões de 60 minutos a cada 15 dias para revisão de progresso, ajustes táticos e resolução de bloqueios. Você nunca fica sem direção.</p>
+            </div>
+          </div>
+          <div class="processo-es__step">
+            <span class="processo-es__step-num">04</span>
+            <div>
+              <h3 class="processo-es__step-title">Fechamento e consolidação</h3>
+              <p class="processo-es__step-text">Ao final do ciclo, entrego o relatório de resultados e o roadmap para o próximo período — para que você continue avançando com autonomia.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INVESTIMENTO -->
+    <section id="investimento" class="invest-es" aria-labelledby="inv-titulo">
+      <div class="container">
+        <div class="invest-es__layout">
+          <div>
+            <p class="invest-es__eyebrow">O investimento</p>
+            <h2 class="invest-es__title" id="inv-titulo">Um ciclo de 90 dias que muda a trajetória do seu negócio</h2>
+            <p class="invest-es__text">A Essencial trabalha com grupos fechados e vagas muito limitadas por trimestre. Isso garante que cada cliente receba atenção real — não um template.</p>
+            <div class="invest-es__includes">
+              <p class="invest-es__include">2 sessões de diagnóstico profundo (3h total)</p>
+              <p class="invest-es__include">Mapa estratégico personalizado (documento executivo)</p>
+              <p class="invest-es__include">6 sessões de acompanhamento quinzenal (60min cada)</p>
+              <p class="invest-es__include">Canal de comunicação direta via WhatsApp/email</p>
+              <p class="invest-es__include">Relatório final e roadmap para o próximo ciclo</p>
+              <p class="invest-es__include">1 sessão adicional de emergência (se necessário)</p>
+            </div>
+          </div>
+          <div class="invest-es__card">
+            <p class="invest-es__card-eyebrow">Ciclo de 90 dias</p>
+            <p class="invest-es__price">R$ 8.400<span>/trimestre</span></p>
+            <p class="invest-es__installment">ou 3x de R$ 2.800 mensais</p>
+            <div class="invest-es__divider"></div>
+            <a href="#" class="btn--es btn--es--filled" style="width:100%;justify-content:center;font-size:var(--text-sm)">
+              Solicitar proposta →
+            </a>
+            <p class="invest-es__note">As vagas do próximo ciclo são limitadas. Solicite a proposta para verificar disponibilidade.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-es" aria-labelledby="cta-titulo">
+      <div class="container">
+        <p class="cta-es__eyebrow">Próximos passos</p>
+        <h2 class="cta-es__title" id="cta-titulo">
+          Clareza <em>não é um luxo.</em><br>É a base de tudo.
+        </h2>
+        <p class="cta-es__sub">Converse com a Fernanda e descubra se faz sentido trabalharmos juntos.</p>
+        <a href="#" class="btn--es btn--es--filled">
+          Solicitar proposta
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer footer--simple" role="contentinfo">
+    <div class="footer__inner">
+      <p class="footer__logo" style="font-family:'Playfair Display',serif;font-style:italic;font-weight:400">Essencial</p>
+      <p class="footer__contact">
+        <span>📍</span>
+        <span>São Paulo, SP — Atendimento presencial e remoto</span>
+        ·
+        <a href="mailto:contato@essencial.com">contato@essencial.com</a>
+      </p>
+      <p class="footer__copyright">© 2025 Essencial Consultoria Estratégica · Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Inner Circle — A mentoria de elite para fundadores e líderes que querem crescer mais rápido e com mais clareza.">
+  <meta property="og:title" content="Inner Circle — Mentoria de Negócios">
+  <meta property="og:type" content="website">
+  <title>Inner Circle — Mentoria de Negócios de Elite</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── Tokens dark específicos desta página ── */
+    :root {
+      --ic-bg:         #080C14;
+      --ic-surface:    #0F1624;
+      --ic-surface2:   #141D2F;
+      --ic-border:     rgba(99,102,241,0.2);
+      --ic-accent:     #6366F1;
+      --ic-accent2:    #A855F7;
+      --ic-gold:       #FACC15;
+      --ic-text:       #F1F5F9;
+      --ic-muted:      #94A3B8;
+    }
+
+    body { background-color: var(--ic-bg); color: var(--ic-text); }
+
+    /* Header dark */
+    .header--ic {
+      background-color: rgba(8,12,20,0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--ic-border);
+    }
+    .header--ic .header__logo { color: var(--ic-text); }
+    .header--ic .header__nav-link { color: var(--ic-muted); }
+    .header--ic .header__nav-link:hover { color: var(--ic-text); }
+    .header--ic .header__menu-bar { background-color: var(--ic-text); }
+
+    /* Hero */
+    .ic-hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: calc(var(--header-height) + var(--space-16)) 0 var(--space-16);
+      background-color: var(--ic-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ic-hero::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+      top: -200px;
+      right: -150px;
+      pointer-events: none;
+    }
+
+    .ic-hero::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(168,85,247,0.12) 0%, transparent 70%);
+      bottom: -100px;
+      left: -80px;
+      pointer-events: none;
+    }
+
+    .ic-hero__inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 var(--container-gutter);
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ic-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: #A5B4FC;
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+      letter-spacing: 0.03em;
+    }
+
+    .ic-hero__title {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-weight-bold);
+      line-height: 1.1;
+      color: var(--ic-text);
+      margin-bottom: var(--space-6);
+    }
+
+    @media (min-width: 768px) {
+      .ic-hero__title { font-size: 4rem; }
+    }
+
+    .ic-hero__title .accent { color: var(--ic-accent); }
+    .ic-hero__title .gold   { color: var(--ic-gold); }
+
+    .ic-hero__sub {
+      font-size: var(--text-xl);
+      color: var(--ic-muted);
+      line-height: var(--line-height-relaxed);
+      max-width: 600px;
+      margin: 0 auto var(--space-10);
+    }
+
+    .ic-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      justify-content: center;
+    }
+
+    .btn--ic {
+      background: linear-gradient(135deg, var(--ic-accent), var(--ic-accent2));
+      color: #FFFFFF;
+      box-shadow: 0 0 30px rgba(99,102,241,0.35);
+      border: none;
+    }
+
+    .btn--ic:hover {
+      box-shadow: 0 0 45px rgba(99,102,241,0.5);
+      transform: translateY(-2px);
+    }
+
+    .ic-hero__stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-8);
+      margin-top: var(--space-12);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--ic-border);
+    }
+
+    .ic-stat__value {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-weight-bold);
+      background: linear-gradient(135deg, var(--ic-accent), var(--ic-accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .ic-stat__label { font-size: var(--text-sm); color: var(--ic-muted); }
+
+    /* Seções */
+    .ic-section {
+      padding: var(--space-20) 0;
+      background-color: var(--ic-bg);
+    }
+
+    .ic-section--surface {
+      background-color: var(--ic-surface);
+    }
+
+    .ic-section__header {
+      text-align: center;
+      margin-bottom: var(--space-12);
+    }
+
+    .ic-label {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ic-accent);
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+
+    .ic-title {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--ic-text);
+      margin-bottom: var(--space-4);
+    }
+
+    @media (min-width: 768px) { .ic-title { font-size: var(--text-4xl); } }
+
+    .ic-subtitle {
+      font-size: var(--text-lg);
+      color: var(--ic-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Cards dark */
+    .ic-card {
+      background-color: var(--ic-surface2);
+      border: 1px solid var(--ic-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      transition: border-color var(--transition-base), box-shadow var(--transition-base);
+    }
+
+    .ic-card:hover {
+      border-color: rgba(99,102,241,0.5);
+      box-shadow: 0 0 30px rgba(99,102,241,0.12);
+    }
+
+    .ic-card__icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(99,102,241,0.12);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-4);
+      color: var(--ic-accent);
+    }
+
+    .ic-card__title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-semibold);
+      color: var(--ic-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .ic-card__text { font-size: var(--text-base); color: var(--ic-muted); line-height: var(--line-height-relaxed); }
+
+    /* Depoimentos dark */
+    .ic-testimonial {
+      background: var(--ic-surface2);
+      border: 1px solid var(--ic-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .ic-testimonial__stars { color: var(--ic-gold); margin-bottom: var(--space-3); }
+    .ic-testimonial__quote { font-size: var(--text-base); color: var(--ic-text); line-height: var(--line-height-relaxed); font-style: italic; margin-bottom: var(--space-4); }
+    .ic-testimonial__name { font-size: var(--text-sm); font-weight: var(--font-weight-semibold); color: var(--ic-text); }
+    .ic-testimonial__role { font-size: var(--text-xs); color: var(--ic-muted); }
+
+    /* Pricing dark */
+    .ic-pricing {
+      max-width: 480px;
+      margin: 0 auto;
+      background: var(--ic-surface2);
+      border: 1px solid rgba(99,102,241,0.4);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10);
+      text-align: center;
+      box-shadow: 0 0 60px rgba(99,102,241,0.15);
+    }
+
+    .ic-pricing__plan { font-size: var(--text-sm); color: var(--ic-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-3); }
+
+    .ic-pricing__value {
+      font-size: var(--text-5xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--ic-text);
+      line-height: 1;
+      margin-bottom: var(--space-2);
+    }
+
+    .ic-pricing__from { font-size: var(--text-sm); color: var(--ic-muted); text-decoration: line-through; margin-bottom: var(--space-2); }
+    .ic-pricing__period { font-size: var(--text-sm); color: var(--ic-muted); margin-bottom: var(--space-8); }
+
+    .ic-pricing__items { text-align: left; display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-8); }
+
+    .ic-pricing__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--ic-muted);
+    }
+
+    .ic-pricing__check {
+      width: 20px;
+      height: 20px;
+      border-radius: var(--radius-full);
+      background: rgba(99,102,241,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--ic-accent);
+    }
+
+    /* CTA final dark */
+    .ic-cta {
+      background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(168,85,247,0.1));
+      border-top: 1px solid var(--ic-border);
+      border-bottom: 1px solid var(--ic-border);
+      padding: var(--space-20) 0;
+      text-align: center;
+    }
+
+    /* Garantia */
+    .ic-garantia {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--ic-surface2);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      display: flex;
+      gap: var(--space-5);
+      align-items: flex-start;
+    }
+
+    .ic-garantia__icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(16,185,129,0.1);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #10B981;
+      flex-shrink: 0;
+    }
+
+    .ic-garantia__title { font-size: var(--text-lg); font-weight: var(--font-weight-bold); color: var(--ic-text); margin-bottom: var(--space-2); }
+    .ic-garantia__text  { font-size: var(--text-base); color: var(--ic-muted); line-height: var(--line-height-relaxed); }
+
+    /* Footer */
+    .ic-footer {
+      background-color: var(--ic-surface);
+      border-top: 1px solid var(--ic-border);
+      padding: var(--space-8) 0;
+      text-align: center;
+    }
+
+    .ic-footer p { font-size: var(--text-sm); color: var(--ic-muted); margin-bottom: var(--space-2); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--ic" role="banner">
+    <div class="header__inner">
+      <a href="#" class="header__logo" aria-label="Inner Circle — Página inicial">Inner Circle</a>
+      <nav class="header__nav" aria-label="Navegação principal">
+        <a href="#beneficios" class="header__nav-link">Benefícios</a>
+        <a href="#depoimentos" class="header__nav-link">Resultados</a>
+        <a href="#oferta"     class="header__nav-link">Investimento</a>
+      </nav>
+      <a href="#oferta" class="btn btn--ic btn--sm header__cta">Quero entrar</a>
+      <button class="header__menu-btn" type="button" aria-expanded="false" aria-label="Abrir menu" aria-controls="ic-drawer">
+        <span class="header__menu-bar"></span>
+        <span class="header__menu-bar"></span>
+        <span class="header__menu-bar"></span>
+      </button>
+    </div>
+    <nav class="header__drawer" id="ic-drawer" aria-label="Navegação mobile">
+      <a href="#beneficios" class="header__drawer-link">Benefícios</a>
+      <a href="#depoimentos" class="header__drawer-link">Resultados</a>
+      <a href="#oferta"     class="header__drawer-link">Investimento</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="ic-hero" aria-labelledby="ic-hero-titulo">
+      <div class="ic-hero__inner">
+        <span class="ic-badge" aria-label="Turma com vagas limitadas">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+          Turma exclusiva — apenas 12 vagas
+        </span>
+        <h1 class="ic-hero__title" id="ic-hero-titulo">
+          Fundadores que <span class="accent">crescem mais rápido</span> têm uma coisa em comum:<br>
+          <span class="gold">o ambiente certo</span>
+        </h1>
+        <p class="ic-hero__sub">Inner Circle é a mentoria de elite para fundadores e líderes que querem clareza estratégica, execução de alto nível e um network que realmente abre portas.</p>
+        <div class="ic-hero__actions">
+          <a href="https://wa.me/5511999999999?text=Quero+entrar+no+Inner+Circle!" class="btn btn--ic btn--xl" target="_blank" rel="noopener noreferrer" aria-label="Quero entrar no Inner Circle">Quero entrar no Inner Circle</a>
+          <a href="#beneficios" class="btn btn--ghost btn--lg">Ver benefícios</a>
+        </div>
+        <div class="ic-hero__stats" role="list">
+          <div role="listitem"><p class="ic-stat__value">+180</p><p class="ic-stat__label">fundadores formados</p></div>
+          <div role="listitem"><p class="ic-stat__value">3.4x</p><p class="ic-stat__label">crescimento médio em receita</p></div>
+          <div role="listitem"><p class="ic-stat__value">4.9 ★</p><p class="ic-stat__label">satisfação</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFÍCIOS -->
+    <section id="beneficios" class="ic-section ic-section--surface" aria-labelledby="ben-titulo">
+      <div class="container">
+        <div class="ic-section__header">
+          <span class="ic-label">O que você conquista</span>
+          <h2 class="ic-title" id="ben-titulo">Tudo que você precisa para o próximo nível</h2>
+          <p class="ic-subtitle">Não é coaching motivacional. É estratégia, execução e acesso.</p>
+        </div>
+        <div class="grid-3">
+          <div class="ic-card">
+            <div class="ic-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 class="ic-card__title">Estratégia de crescimento</h3>
+            <p class="ic-card__text">Plano de 90 dias com metas de receita, produto e time — construído junto com o mentor e validado com dados reais do seu negócio.</p>
+          </div>
+          <div class="ic-card">
+            <div class="ic-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="ic-card__title">Network de elite</h3>
+            <p class="ic-card__text">Acesso direto a outros 12 fundadores no mesmo momento de crescimento. Parcerias, indicações e aprendizado com quem está na trincheira.</p>
+          </div>
+          <div class="ic-card">
+            <div class="ic-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3 class="ic-card__title">Acesso a oportunidades</h3>
+            <p class="ic-card__text">Apresentações para investidores, parceiros estratégicos e clientes corporativos — feitas diretamente pelo mentor da sua turma.</p>
+          </div>
+          <div class="ic-card">
+            <div class="ic-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3 class="ic-card__title">Sessões intensivas</h3>
+            <p class="ic-card__text">Encontros presenciais (ou online) mensais de meio dia com análise profunda do negócio, resolução de bloqueios e planejamento de ação.</p>
+          </div>
+          <div class="ic-card">
+            <div class="ic-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 class="ic-card__title">Suporte assíncrono ilimitado</h3>
+            <p class="ic-card__text">Canal direto com o mentor via WhatsApp para tirar dúvidas, validar decisões e receber feedback em até 24 horas úteis.</p>
+          </div>
+          <div class="ic-card">
+            <div class="ic-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <h3 class="ic-card__title">Biblioteca exclusiva</h3>
+            <p class="ic-card__text">Frameworks, playbooks e estudos de caso de +50 empresas que cresceram de R$1M a R$10M — com acesso vitalício.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section id="depoimentos" class="ic-section" aria-labelledby="dep-titulo">
+      <div class="container">
+        <div class="ic-section__header">
+          <span class="ic-label">Resultados reais</span>
+          <h2 class="ic-title" id="dep-titulo">O que os fundadores dizem</h2>
+        </div>
+        <div class="grid-3">
+          <div class="ic-testimonial">
+            <p class="ic-testimonial__stars" aria-label="5 estrelas">★★★★★</p>
+            <p class="ic-testimonial__quote">Em 6 meses a receita triplicou. Mas o mais valioso foi a clareza — deixei de tomar decisões com medo e comecei a decidir com estratégia.</p>
+            <p class="ic-testimonial__name">Lucas Ferreira</p>
+            <p class="ic-testimonial__role">Fundador, plataforma B2B SaaS</p>
+          </div>
+          <div class="ic-testimonial">
+            <p class="ic-testimonial__stars" aria-label="5 estrelas">★★★★★</p>
+            <p class="ic-testimonial__quote">Uma única conexão feita dentro da turma gerou um contrato de R$2M. O ROI do investimento na mentoria foi absurdo.</p>
+            <p class="ic-testimonial__name">Mariana Costa</p>
+            <p class="ic-testimonial__role">CEO, empresa de logística</p>
+          </div>
+          <div class="ic-testimonial">
+            <p class="ic-testimonial__stars" aria-label="5 estrelas">★★★★★</p>
+            <p class="ic-testimonial__quote">Finalmente encontrei um ambiente onde todos falam a mesma língua. Saí do isolamento do fundador e passei a ter pares reais.</p>
+            <p class="ic-testimonial__name">Rafael Lima</p>
+            <p class="ic-testimonial__role">Fundador, agência de crescimento</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OFERTA -->
+    <section id="oferta" class="ic-section ic-section--surface" aria-labelledby="oferta-titulo">
+      <div class="container">
+        <div class="ic-section__header">
+          <span class="ic-label">Investimento</span>
+          <h2 class="ic-title" id="oferta-titulo">Uma vaga no Inner Circle</h2>
+        </div>
+        <div class="ic-pricing">
+          <p class="ic-pricing__plan">Mentoria 6 meses</p>
+          <p class="ic-pricing__from">De R$ 24.000</p>
+          <p class="ic-pricing__value">R$ 14.900</p>
+          <p class="ic-pricing__period">à vista · ou 6x R$ 2.650</p>
+          <ul class="ic-pricing__items" aria-label="Inclusos">
+            <li class="ic-pricing__item"><span class="ic-pricing__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg></span>6 sessões intensivas (presencial ou online)</li>
+            <li class="ic-pricing__item"><span class="ic-pricing__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg></span>Turma com máximo de 12 fundadores</li>
+            <li class="ic-pricing__item"><span class="ic-pricing__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg></span>Suporte assíncrono ilimitado</li>
+            <li class="ic-pricing__item"><span class="ic-pricing__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg></span>Acesso a apresentações para investidores</li>
+            <li class="ic-pricing__item"><span class="ic-pricing__check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" width="12" height="12"><polyline points="20 6 9 17 4 12"/></svg></span>Biblioteca exclusiva com acesso vitalício</li>
+          </ul>
+          <a href="https://wa.me/5511999999999?text=Quero+minha+vaga+no+Inner+Circle!" class="btn btn--ic btn--full btn--lg" target="_blank" rel="noopener noreferrer" aria-label="Solicitar vaga no Inner Circle">
+            Solicitar minha vaga
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARANTIA -->
+    <section class="ic-section" aria-labelledby="gar-titulo">
+      <div class="container">
+        <div class="ic-garantia">
+          <div class="ic-garantia__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <div>
+            <h2 class="ic-garantia__title" id="gar-titulo">Garantia de encaixe — 30 dias</h2>
+            <p class="ic-garantia__text">Se após o primeiro mês você sentir que o Inner Circle não é o ambiente certo para o seu momento, devolvemos 100% do investimento. Trabalhamos com fundadores sérios — e queremos garantir que o encaixe seja real dos dois lados.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="ic-cta" aria-labelledby="ctaf-titulo">
+      <div class="container" style="text-align:center">
+        <span class="ic-label" style="color:#A5B4FC">Vagas esgotando</span>
+        <h2 class="ic-title" id="ctaf-titulo" style="max-width:600px;margin:0 auto var(--space-6)">Pronto para o próximo nível?</h2>
+        <p class="ic-subtitle" style="margin-bottom:var(--space-8)">Próxima turma começa em agosto. Processo seletivo por aplicação.</p>
+        <a href="https://wa.me/5511999999999?text=Quero+aplicar+para+o+Inner+Circle!" class="btn btn--ic btn--xl" target="_blank" rel="noopener noreferrer" aria-label="Aplicar para o Inner Circle">
+          Aplicar agora
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="ic-footer" role="contentinfo">
+    <div class="container">
+      <p><strong style="color:var(--ic-text)">Inner Circle</strong></p>
+      <p>© 2025 Inner Circle Mentoria · Todos os direitos reservados</p>
+      <p>Os resultados são individuais. O programa não garante retorno financeiro específico.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5511999999999?text=Tenho+uma+d%C3%BAvida+sobre+o+Inner+Circle" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Falar pelo WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

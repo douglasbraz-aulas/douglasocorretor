@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Briefing de design system para quem está desenvolvendo o próprio site. Organize sua identidade visual e exporte um PDF de referência.">
+  <meta property="og:title" content="Briefing do Meu Site — Design System Pessoal">
+  <meta property="og:type" content="website">
+  <title>Briefing — Meu Próprio Site</title>
+  <link rel="stylesheet" href="../Templates/css/main.css">
+  <style>
+    /* ── Seções do formulário ── */
+    .form-section {
+      margin-top: var(--space-10);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-border);
+    }
+    .form-section:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+    .form-section__header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+    .form-section__num {
+      width: 28px; height: 28px;
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-bold);
+      flex-shrink: 0;
+    }
+    .form-section__title {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+    }
+
+    /* ── Color field ── */
+    .color-field {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+    }
+    .color-field__picker {
+      width: 52px; height: 44px;
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 3px;
+      cursor: pointer;
+      background: none;
+      flex-shrink: 0;
+    }
+    .color-field__picker:hover { border-color: var(--color-border-focus); }
+    .color-field__text { flex: 1; }
+
+    /* ── Estilo visual — grid de opções ── */
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+    @media (min-width: 640px) {
+      .style-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .style-option {
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4) var(--space-3);
+      cursor: pointer;
+      transition: border-color var(--transition-base), background-color var(--transition-base);
+      text-align: center;
+    }
+    .style-option:hover { border-color: var(--color-primary-light); }
+    .style-option.is-selected {
+      border-color: var(--color-primary);
+      background-color: rgba(29,78,216,0.04);
+    }
+    .style-option input[type="radio"] { display: none; }
+    .style-option__icon { font-size: 1.5rem; display: block; margin-bottom: var(--space-1); }
+    .style-option__name {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text);
+    }
+    .style-option__desc {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    /* ── Checkbox group ── */
+    .form__check-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    /* ── Campo condicional ── */
+    [data-cond] { transition: opacity var(--transition-base); }
+    [data-cond][hidden] { display: none; }
+
+    /* ── Paleta de cores ── */
+    .palette-hint {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-5);
+      line-height: var(--line-height-relaxed);
+    }
+
+    /* ── Badge de destaque para seção técnica ── */
+    .section-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: var(--font-weight-bold);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      margin-left: var(--space-2);
+      vertical-align: middle;
+    }
+
+    /* ── PDF print layout ── */
+    #pdf-preview { display: none; }
+    @media print {
+      body > *:not(#pdf-preview) { display: none !important; }
+      #pdf-preview { display: block !important; font-family: system-ui, sans-serif; color: #111; }
+      @page { margin: 18mm 20mm; }
+      .pdf-header { margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid #111827; }
+      .pdf-header h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+      .pdf-brand { font-size: 14px; color: #374151; margin: 0; }
+      .pdf-section { margin-top: 20px; page-break-inside: avoid; }
+      .pdf-section h2 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #6b7280; margin: 0 0 10px; border-bottom: 1px solid #e5e7eb; padding-bottom: 4px; }
+      .pdf-palette { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+      .pdf-swatch-box { height: 48px; border-radius: 6px; border: 1px solid #e5e7eb; }
+      .pdf-swatch-name { font-size: 9px; font-weight: 600; margin: 3px 0 1px; color: #111; }
+      .pdf-swatch-hex { font-size: 9px; color: #6b7280; margin: 0; }
+      .pdf-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+      .pdf-table td { padding: 5px 8px 5px 0; vertical-align: top; }
+      .pdf-table td:first-child { font-weight: 600; color: #374151; width: 140px; }
+      .pdf-footer { margin-top: 28px; font-size: 9px; color: #9ca3af; text-align: right; border-top: 1px solid #e5e7eb; padding-top: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--solid" role="banner">
+    <div class="header__inner">
+      <span class="header__logo">Briefing — Meu Próprio Site</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- INTRO -->
+    <section class="section section--sm" aria-labelledby="intro-titulo">
+      <div class="container">
+        <div style="max-width:640px;margin:0 auto;text-align:center;padding:var(--space-12) 0 var(--space-4)">
+          <p style="font-size:var(--text-xs);font-weight:var(--font-weight-bold);text-transform:uppercase;letter-spacing:0.1em;color:var(--color-primary);margin-bottom:var(--space-3)">Para quem desenvolve o próprio site</p>
+          <h1 style="font-size:var(--text-3xl);font-weight:var(--font-weight-bold);color:var(--color-text);margin-bottom:var(--space-4)" id="intro-titulo">Design System do Meu Site</h1>
+          <p style="font-size:var(--text-lg);color:var(--color-text-muted);line-height:var(--line-height-relaxed)">
+            Organize a identidade visual do seu projeto antes de começar a codificar. Ao terminar, exporte um PDF de referência para consultar durante o desenvolvimento.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO -->
+    <section class="section" aria-labelledby="form-titulo">
+      <div class="container">
+        <div class="form-card" style="max-width:680px;margin:0 auto">
+          <div class="form-card__header">
+            <h2 class="form-card__title" id="form-titulo">Sobre o meu projeto</h2>
+            <p class="form-card__subtitle">Campos com * são obrigatórios · Os demais são opcionais mas ajudam na hora de desenvolver</p>
+          </div>
+
+          <!-- Substitua 5511999999999 pelo seu próprio número para salvar o briefing -->
+          <form
+            class="form"
+            data-whatsapp-form
+            data-whatsapp-phone="5511999999999"
+            data-whatsapp-title="Briefing do Meu Site"
+            novalidate
+          >
+
+            <!-- ══ SEÇÃO 1 — SOBRE O PROJETO ══ -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <span class="form-section__num" aria-hidden="true">1</span>
+                <h3 class="form-section__title">Sobre o projeto</h3>
+              </div>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="projeto">Nome do projeto / site</label>
+                  <input class="form__input" type="text" id="projeto" name="projeto" placeholder="Ex: Studio Ana Lima, Portfólio Dev, Blog Viajante" required autocomplete="organization" data-label="Nome do projeto">
+                  <span class="form__error" data-error-for="projeto" style="display:none">Informe o nome do projeto</span>
+                </div>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="segmento">Segmento / área</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="segmento" name="segmento" required data-label="Segmento">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Saúde / Bem-estar">Saúde / Bem-estar</option>
+                      <option value="Jurídico / Advocacia">Jurídico / Advocacia</option>
+                      <option value="Imóveis">Imóveis</option>
+                      <option value="Educação / Cursos">Educação / Cursos</option>
+                      <option value="Tech / Software">Tech / Software</option>
+                      <option value="Beleza / Estética">Beleza / Estética</option>
+                      <option value="Alimentação">Alimentação</option>
+                      <option value="Finanças / Contabilidade">Finanças / Contabilidade</option>
+                      <option value="Consultoria">Consultoria</option>
+                      <option value="Portfólio Pessoal">Portfólio Pessoal</option>
+                      <option value="Blog / Conteúdo">Blog / Conteúdo</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                  <span class="form__error" data-error-for="segmento" style="display:none">Selecione o segmento</span>
+                </div>
+              </div>
+
+              <div data-outro-for="segmento" hidden>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="segmento-outro">Qual é a área?</label>
+                  <input class="form__input" type="text" id="segmento-outro" name="segmento-outro" placeholder="Descreva a área de atuação" data-label="Segmento (especificar)">
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="publico">Quem vai visitar o meu site?</label>
+                <input class="form__input" type="text" id="publico" name="publico" placeholder="Ex: empresas B2B procurando dev freelancer, jovens interessados em receitas fit" required data-label="Público-alvo">
+                <span class="form__error" data-error-for="publico" style="display:none">Descreva quem vai visitar o site</span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="personalidade">3 palavras que descrevem o projeto</label>
+                <input class="form__input" type="text" id="personalidade" name="personalidade" placeholder="Ex: criativo, direto, confiável" required data-label="Personalidade do projeto">
+                <span class="form__error" data-error-for="personalidade" style="display:none">Informe 3 palavras</span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="tom-voz">Tom de voz do site</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="tom-voz" name="tom-voz" required data-label="Tom de voz">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Formal e técnico">Formal e técnico</option>
+                    <option value="Profissional e acessível">Profissional e acessível</option>
+                    <option value="Descontraído e próximo">Descontraído e próximo</option>
+                    <option value="Empático e acolhedor">Empático e acolhedor</option>
+                    <option value="Direto e objetivo">Direto e objetivo</option>
+                  </select>
+                </div>
+                <span class="form__error" data-error-for="tom-voz" style="display:none">Selecione o tom de voz</span>
+              </div>
+            </div>
+
+            <!-- ══ SEÇÃO 2 — IDENTIDADE VISUAL ══ -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <span class="form-section__num" aria-hidden="true">2</span>
+                <h3 class="form-section__title">Identidade visual</h3>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="ds-existente">Já tenho algum guia de marca ou identidade visual definida?</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="ds-existente" name="ds-existente" required data-label="Identidade existente">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Sim">Sim, tenho um guia de marca ou referência visual</option>
+                    <option value="Não">Não, vou definir agora</option>
+                  </select>
+                </div>
+                <span class="form__error" data-error-for="ds-existente" style="display:none">Selecione uma opção</span>
+              </div>
+
+              <!-- SE JÁ TEM GUIA -->
+              <div data-cond="ds-sim" hidden>
+                <div class="form__group">
+                  <label class="form__label" for="ds-link">Link ou arquivo do guia (opcional)</label>
+                  <input class="form__input" type="url" id="ds-link" name="ds-link" placeholder="https://..." data-label="Link do guia de marca">
+                </div>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="ds-descricao">Descreva as principais cores, fontes e regras do guia</label>
+                  <textarea class="form__textarea" id="ds-descricao" name="ds-descricao" placeholder="Ex: Cor primária #1D4ED8 (azul), fonte heading Montserrat Bold, body Open Sans. Não usar rosa ou vermelho." data-label="Descrição do guia de marca"></textarea>
+                </div>
+              </div>
+
+              <!-- SE NÃO TEM GUIA — definir agora -->
+              <div data-cond="ds-nao" hidden>
+
+                <p class="palette-hint">Defina as cores do seu site. Use o seletor ou cole o código hex. Pode usar o <a href="https://color.adobe.com/create/color-wheel" target="_blank" rel="noopener noreferrer" style="color:var(--color-primary)">Adobe Color</a> para criar combinações harmônicas.</p>
+
+                <div class="form__row">
+                  <div class="form__group">
+                    <label class="form__label form__label--required" for="cor-primary-hex">Cor Principal</label>
+                    <div class="color-field">
+                      <input type="color" id="cor-primary-picker" class="color-field__picker" value="#1D4ED8" aria-label="Escolher cor principal">
+                      <input type="text" id="cor-primary-hex" name="cor-primary-hex" class="form__input color-field__text" value="#1D4ED8" placeholder="#1D4ED8" maxlength="7" data-label="Cor principal">
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cor-secondary-hex">Cor Secundária</label>
+                    <div class="color-field">
+                      <input type="color" id="cor-secondary-picker" class="color-field__picker" value="#059669" aria-label="Escolher cor secundária">
+                      <input type="text" id="cor-secondary-hex" name="cor-secondary-hex" class="form__input color-field__text" value="#059669" placeholder="#059669" maxlength="7" data-label="Cor secundária">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__row">
+                  <div class="form__group">
+                    <label class="form__label" for="cor-accent-hex">Cor de Destaque (Accent)</label>
+                    <div class="color-field">
+                      <input type="color" id="cor-accent-picker" class="color-field__picker" value="#F59E0B" aria-label="Escolher cor de destaque">
+                      <input type="text" id="cor-accent-hex" name="cor-accent-hex" class="form__input color-field__text" value="#F59E0B" placeholder="#F59E0B" maxlength="7" data-label="Cor de destaque">
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cor-text-hex">Cor de Texto</label>
+                    <div class="color-field">
+                      <input type="color" id="cor-text-picker" class="color-field__picker" value="#111827" aria-label="Escolher cor de texto">
+                      <input type="text" id="cor-text-hex" name="cor-text-hex" class="form__input color-field__text" value="#111827" placeholder="#111827" maxlength="7" data-label="Cor de texto">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__row">
+                  <div class="form__group">
+                    <label class="form__label" for="cor-bg-hex">Cor de Fundo Principal</label>
+                    <div class="color-field">
+                      <input type="color" id="cor-bg-picker" class="color-field__picker" value="#FFFFFF" aria-label="Escolher cor de fundo">
+                      <input type="text" id="cor-bg-hex" name="cor-bg-hex" class="form__input color-field__text" value="#FFFFFF" placeholder="#FFFFFF" maxlength="7" data-label="Cor de fundo">
+                    </div>
+                  </div>
+                  <div class="form__group">
+                    <label class="form__label" for="cor-neutral-light-hex">Neutro Claro (fundo alternativo)</label>
+                    <div class="color-field">
+                      <input type="color" id="cor-neutral-light-picker" class="color-field__picker" value="#F8FAFC" aria-label="Escolher neutro claro">
+                      <input type="text" id="cor-neutral-light-hex" name="cor-neutral-light-hex" class="form__input color-field__text" value="#F8FAFC" placeholder="#F8FAFC" maxlength="7" data-label="Neutro claro">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label" for="cor-neutral-dark-hex">Neutro Escuro (fundo escuro)</label>
+                  <div class="color-field" style="max-width:320px">
+                    <input type="color" id="cor-neutral-dark-picker" class="color-field__picker" value="#1E293B" aria-label="Escolher neutro escuro">
+                    <input type="text" id="cor-neutral-dark-hex" name="cor-neutral-dark-hex" class="form__input color-field__text" value="#1E293B" placeholder="#1E293B" maxlength="7" data-label="Neutro escuro">
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label form__label--required">Estilo visual que mais combina com o projeto</label>
+                  <div class="style-grid" role="radiogroup" aria-label="Estilo visual">
+                    <label class="style-option">
+                      <input type="radio" name="estilo-radio" value="Moderno">
+                      <span class="style-option__icon">⚡</span>
+                      <span class="style-option__name">Moderno</span>
+                      <span class="style-option__desc">Linhas limpas, gradientes, tecnológico</span>
+                    </label>
+                    <label class="style-option">
+                      <input type="radio" name="estilo-radio" value="Minimalista">
+                      <span class="style-option__icon">◻</span>
+                      <span class="style-option__name">Minimalista</span>
+                      <span class="style-option__desc">Espaço em branco, simples e elegante</span>
+                    </label>
+                    <label class="style-option">
+                      <input type="radio" name="estilo-radio" value="Futurista">
+                      <span class="style-option__icon">✦</span>
+                      <span class="style-option__name">Futurista</span>
+                      <span class="style-option__desc">Dark, formas arrojadas, efeitos visuais</span>
+                    </label>
+                    <label class="style-option">
+                      <input type="radio" name="estilo-radio" value="Profissional">
+                      <span class="style-option__icon">🏛</span>
+                      <span class="style-option__name">Profissional</span>
+                      <span class="style-option__desc">Sóbrio, confiável, corporativo</span>
+                    </label>
+                  </div>
+                  <input type="hidden" id="estilo-hidden" name="estilo-hidden" data-label="Estilo visual">
+                </div>
+
+              </div><!-- /ds-nao -->
+
+            </div>
+
+            <!-- ══ SEÇÃO 3 — FONTES E IMAGENS ══ -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <span class="form-section__num" aria-hidden="true">3</span>
+                <h3 class="form-section__title">Fontes e imagens</h3>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="fonte-heading">Fonte que quero usar no site (se já decidiu)</label>
+                <input class="form__input" type="text" id="fonte-heading" name="fonte-heading" placeholder="Ex: Montserrat, Playfair Display, Inter — ou deixe em branco" data-label="Fonte do site">
+                <span class="form__hint" style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1);display:block">Pode ser a fonte dos títulos. Se ainda não decidiu, deixe em branco.</span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="animacoes">Nível de animação</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="animacoes" name="animacoes" data-label="Animações">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Sem animações">Sem animações — estático e direto</option>
+                    <option value="Sutis">Sutis — aparecimento suave ao rolar</option>
+                    <option value="Moderadas">Moderadas — scroll reveal + hover</option>
+                    <option value="Expressivas">Expressivas — movimento contínuo e impactante</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required">Que tipo de imagens tenho disponível?</label>
+                <div class="form__check-group" role="group" aria-label="Tipo de imagens disponíveis">
+                  <label class="form__check">
+                    <input class="form__check-input foto-check" type="checkbox" value="Fotos de ensaio profissional">
+                    <span class="form__check-label">Fotos de ensaio profissional</span>
+                  </label>
+                  <label class="form__check">
+                    <input class="form__check-input foto-check" type="checkbox" value="Fotos do ambiente, estrutura ou produto">
+                    <span class="form__check-label">Fotos do ambiente, estrutura ou produto</span>
+                  </label>
+                  <label class="form__check">
+                    <input class="form__check-input foto-check" type="checkbox" value="Fotos pessoais ou das redes sociais">
+                    <span class="form__check-label">Fotos pessoais ou das redes sociais</span>
+                  </label>
+                  <label class="form__check">
+                    <input class="form__check-input foto-check" type="checkbox" value="Vou criar imagens com IA">
+                    <span class="form__check-label">Vou criar imagens com IA</span>
+                  </label>
+                  <label class="form__check">
+                    <input class="form__check-input foto-check" type="checkbox" value="Não tenho imagens ainda">
+                    <span class="form__check-label">Não tenho imagens ainda</span>
+                  </label>
+                </div>
+                <input type="hidden" id="fotos-hidden" name="fotos-hidden" data-label="Imagens disponíveis">
+                <span class="form__error" data-error-for="fotos-hidden" style="display:none">Selecione ao menos uma opção</span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="foto-profissional">Tenho foto profissional (meu retrato ou do responsável pelo projeto)?</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="foto-profissional" name="foto-profissional" required data-label="Foto profissional disponível">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Sim">Sim, tenho uma boa foto de perfil</option>
+                    <option value="Não">Não tenho foto profissional ainda</option>
+                  </select>
+                </div>
+                <span class="form__error" data-error-for="foto-profissional" style="display:none">Selecione uma opção</span>
+              </div>
+            </div>
+
+            <!-- ══ SEÇÃO 4 — TEXTOS E CTAs ══ -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <span class="form-section__num" aria-hidden="true">4</span>
+                <h3 class="form-section__title">Textos e chamadas para ação</h3>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="slogan">Meu slogan ou frase principal (opcional)</label>
+                <input class="form__input" type="text" id="slogan" name="slogan" placeholder="Ex: Transformando código em experiências" data-label="Slogan">
+                <span class="form__hint" style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1);display:block">Se não tiver, deixe em branco para definir depois.</span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="textos-prontos">Os textos do site estão prontos?</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="textos-prontos" name="textos-prontos" required data-label="Textos prontos">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Sim, tenho todos os textos prontos">Sim, tenho todos os textos prontos</option>
+                    <option value="Tenho alguns, vou completar durante o dev">Tenho alguns, vou completar durante o desenvolvimento</option>
+                    <option value="Não tenho — vou escrever do zero">Não tenho — vou escrever do zero</option>
+                    <option value="Vou usar IA para criar os textos">Vou usar IA para criar os textos</option>
+                  </select>
+                </div>
+                <span class="form__error" data-error-for="textos-prontos" style="display:none">Selecione uma opção</span>
+              </div>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="whatsapp-contato">Meu WhatsApp para o site</label>
+                  <input class="form__input" type="tel" id="whatsapp-contato" name="whatsapp-contato" placeholder="(11) 99999-9999" required autocomplete="tel" data-label="WhatsApp de contato">
+                  <span class="form__hint" style="font-size:var(--text-xs);color:var(--color-text-muted);margin-top:var(--space-1);display:block">Número que os visitantes vão usar para falar comigo.</span>
+                  <span class="form__error" data-error-for="whatsapp-contato" style="display:none">Informe o seu WhatsApp</span>
+                </div>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="cta-principal">O que quero que o visitante faça?</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="cta-principal" name="cta-principal" required data-label="CTA principal">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Agendar consulta ou reunião">Agendar consulta ou reunião</option>
+                      <option value="Comprar produto ou serviço">Comprar produto ou serviço</option>
+                      <option value="Entrar em contato">Entrar em contato</option>
+                      <option value="Baixar material gratuito">Baixar material gratuito</option>
+                      <option value="Assinar newsletter">Assinar newsletter</option>
+                      <option value="Ver meu portfólio">Ver meu portfólio</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                  <span class="form__error" data-error-for="cta-principal" style="display:none">Selecione a ação principal</span>
+                </div>
+              </div>
+
+              <div data-outro-for="cta-principal" hidden>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="cta-principal-outro">Qual é a ação?</label>
+                  <input class="form__input" type="text" id="cta-principal-outro" name="cta-principal-outro" placeholder="Descreva a ação que o visitante deve realizar" data-label="CTA principal (especificar)">
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ══ SEÇÃO 5 — PLANEJAMENTO ══ -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <span class="form-section__num" aria-hidden="true">5</span>
+                <h3 class="form-section__title">Planejamento</h3>
+              </div>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="objetivo-site">Objetivo do site</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="objetivo-site" name="objetivo-site" required data-label="Objetivo do site">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Apresentar minha empresa ou serviços">Apresentar minha empresa ou serviços</option>
+                      <option value="Vender produto ou curso online">Vender produto ou curso online</option>
+                      <option value="Captar contatos pelo formulário">Captar contatos pelo formulário</option>
+                      <option value="Apresentar meu portfólio">Apresentar meu portfólio</option>
+                      <option value="Blog ou publicação de conteúdo">Blog ou publicação de conteúdo</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                  <span class="form__error" data-error-for="objetivo-site" style="display:none">Selecione o objetivo</span>
+                </div>
+
+              <div data-outro-for="objetivo-site" hidden>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="objetivo-site-outro">Qual é o objetivo?</label>
+                  <input class="form__input" type="text" id="objetivo-site-outro" name="objetivo-site-outro" placeholder="Descreva o objetivo principal" data-label="Objetivo (especificar)">
+                </div>
+              </div>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="precisa-form">Vou precisar de formulário de pré-atendimento?</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="precisa-form" name="precisa-form" required data-label="Formulário de pré-atendimento">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Sim">Sim</option>
+                      <option value="Não">Não</option>
+                      <option value="Não sei ainda">Não sei ainda</option>
+                    </select>
+                  </div>
+                  <span class="form__error" data-error-for="precisa-form" style="display:none">Selecione uma opção</span>
+                </div>
+              </div>
+
+              <div data-cond="form-sim" hidden>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="form-segmento">Segmento do formulário</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="form-segmento" name="form-segmento" data-label="Segmento do formulário">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Médico / Saúde">Médico / Saúde</option>
+                      <option value="Advocacia / Jurídico">Advocacia / Jurídico</option>
+                      <option value="Imóveis / Corretor">Imóveis / Corretor</option>
+                      <option value="Educação / Coach">Educação / Coach</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                </div>
+                <div data-outro-for="form-segmento" hidden>
+                  <div class="form__group">
+                    <label class="form__label form__label--required" for="form-segmento-outro">Qual é o segmento?</label>
+                    <input class="form__input" type="text" id="form-segmento-outro" name="form-segmento-outro" placeholder="Descreva o segmento do formulário" data-label="Segmento do formulário (especificar)">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="redes-sociais">Minhas redes sociais para incluir no site (opcional)</label>
+                <input class="form__input" type="text" id="redes-sociais" name="redes-sociais" placeholder="Ex: @meuinstagram, linkedin.com/in/meulinkedin, github.com/meuuser" data-label="Redes sociais">
+              </div>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="dominio">Tenho um domínio definido?</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="dominio" name="dominio" required data-label="Domínio">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Sim">Sim, já tenho</option>
+                      <option value="Não">Não, preciso comprar</option>
+                      <option value="Não sei ainda">Não sei ainda</option>
+                    </select>
+                  </div>
+                  <span class="form__error" data-error-for="dominio" style="display:none">Selecione uma opção</span>
+                </div>
+                <div class="form__group">
+                  <label class="form__label form__label--required" for="prazo">Meu prazo para lançar</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="prazo" name="prazo" required data-label="Prazo">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Esta semana">Esta semana — urgente</option>
+                      <option value="Até 30 dias">Até 30 dias</option>
+                      <option value="Até 3 meses">Até 3 meses</option>
+                      <option value="Sem prazo definido">Sem prazo definido, no meu ritmo</option>
+                    </select>
+                  </div>
+                  <span class="form__error" data-error-for="prazo" style="display:none">Selecione o prazo</span>
+                </div>
+              </div>
+
+              <div data-cond="dominio-sim" hidden>
+                <div class="form__group">
+                  <label class="form__label" for="dominio-texto">Qual é o endereço (domínio)?</label>
+                  <input class="form__input" type="text" id="dominio-texto" name="dominio-texto" placeholder="Ex: meusite.com.br" data-label="Endereço do site">
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="referencias">Sites que me inspiram visualmente (opcional)</label>
+                <textarea class="form__textarea" id="referencias" name="referencias" placeholder="Cole links ou descreva sites que você acha bonitos. Podem ser do mesmo segmento ou de áreas completamente diferentes." data-label="Referências visuais"></textarea>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="observacoes">Anotações para mim mesmo (opcional)</label>
+                <textarea class="form__textarea" id="observacoes" name="observacoes" placeholder="Decisões importantes, restrições, ideias, o que não quero repetir de outros sites..." data-label="Observações"></textarea>
+              </div>
+            </div>
+
+            <!-- ══ SEÇÃO 6 — REFERÊNCIAS TÉCNICAS ══ -->
+            <div class="form-section">
+              <div class="form-section__header">
+                <span class="form-section__num" aria-hidden="true">6</span>
+                <h3 class="form-section__title">Referências técnicas <span class="section-badge">Exclusivo</span></h3>
+              </div>
+
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="tecnologia">Tecnologia / plataforma preferida</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="tecnologia" name="tecnologia" data-label="Tecnologia">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="HTML + CSS + JS puro">HTML + CSS + JS puro</option>
+                      <option value="WordPress">WordPress</option>
+                      <option value="Webflow">Webflow</option>
+                      <option value="React / Next.js">React / Next.js</option>
+                      <option value="Vue / Nuxt">Vue / Nuxt</option>
+                      <option value="Framer">Framer</option>
+                      <option value="Outro">Outro</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form__group">
+                  <label class="form__label" for="hospedagem">Hospedagem em mente</label>
+                  <div class="form__select-wrap">
+                    <select class="form__select" id="hospedagem" name="hospedagem" data-label="Hospedagem">
+                      <option value="" disabled selected>Selecione</option>
+                      <option value="Vercel">Vercel</option>
+                      <option value="Netlify">Netlify</option>
+                      <option value="GitHub Pages">GitHub Pages</option>
+                      <option value="Hostgator / Locaweb">Hostgator / Locaweb</option>
+                      <option value="AWS / GCP / Azure">AWS / GCP / Azure</option>
+                      <option value="Cloudflare Pages">Cloudflare Pages</option>
+                      <option value="Ainda não sei">Ainda não sei</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div data-outro-for="tecnologia" hidden>
+                <div class="form__group">
+                  <label class="form__label" for="tecnologia-outro">Qual é a tecnologia?</label>
+                  <input class="form__input" type="text" id="tecnologia-outro" name="tecnologia-outro" placeholder="Descreva a tecnologia ou framework" data-label="Tecnologia (especificar)">
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="responsividade">Dispositivos prioritários</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="responsividade" name="responsividade" data-label="Responsividade">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Mobile first — a maioria acessa pelo celular">Mobile first — maioria acessa pelo celular</option>
+                    <option value="Desktop first — audiência corporativa / profissional">Desktop first — audiência corporativa</option>
+                    <option value="Igualmente responsivo nos dois">Igualmente responsivo nos dois</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label" for="acessibilidade">Preocupação com acessibilidade (WCAG)</label>
+                <div class="form__select-wrap">
+                  <select class="form__select" id="acessibilidade" name="acessibilidade" data-label="Acessibilidade">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="Alta — quero seguir WCAG AA ou AAA">Alta — quero seguir WCAG AA ou AAA</option>
+                    <option value="Média — boas práticas básicas">Média — boas práticas básicas</option>
+                    <option value="Não é prioridade agora">Não é prioridade agora</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- SUBMIT -->
+            <button class="btn btn--whatsapp btn--lg btn--full" type="submit" style="margin-top:var(--space-8)">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              Salvar Briefing pelo WhatsApp
+            </button>
+
+            <button class="btn btn--lg btn--full" type="button" id="btn-pdf" style="margin-top:var(--space-3);background:#f1f5f9;color:#374151;border:2px solid #e2e8f0;display:flex;align-items:center;justify-content:center;gap:var(--space-2)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+              </svg>
+              Baixar PDF do Design System
+            </button>
+
+            <p class="form__privacy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Suas informações ficam com você. Nada é compartilhado com terceiros.
+            </p>
+
+            <div class="form__success" role="status" aria-live="polite">
+              <div class="form__success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="form__success-title">Briefing salvo!</p>
+              <p class="form__success-text">Você será redirecionado ao WhatsApp com todas as informações. Use como referência durante o desenvolvimento.</p>
+            </div>
+
+          </form>
+
+          <!-- PDF preview — oculto na tela, visível ao imprimir -->
+          <div id="pdf-preview">
+            <div class="pdf-header">
+              <h1>Design System Brief</h1>
+              <p class="pdf-brand" id="pdf-brand-name"></p>
+            </div>
+            <div class="pdf-section">
+              <h2>Paleta de Cores</h2>
+              <div class="pdf-palette" id="pdf-palette"></div>
+            </div>
+            <div class="pdf-section">
+              <h2>Identidade do Projeto</h2>
+              <table class="pdf-table" id="pdf-identity"><tbody></tbody></table>
+            </div>
+            <div class="pdf-section">
+              <h2>Projeto e Técnico</h2>
+              <table class="pdf-table" id="pdf-details"><tbody></tbody></table>
+            </div>
+            <p class="pdf-footer">Gerado em <span id="pdf-date"></span> · Briefing do Meu Próprio Site</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer footer--simple" role="contentinfo">
+    <div class="footer__inner">
+      <p class="footer__copyright">Design System Brief · Desenvolvedor do próprio site</p>
+    </div>
+  </footer>
+
+  <script type="module" src="../Templates/js/main.js"></script>
+  <script type="module">
+    // ── Toggle: identidade existente ──
+    const dsSelect = document.querySelector('#ds-existente');
+    const dsSimEl  = document.querySelector('[data-cond="ds-sim"]');
+    const dsNaoEl  = document.querySelector('[data-cond="ds-nao"]');
+
+    function applyDsToggle() {
+      const val = dsSelect.value;
+      dsSimEl.hidden = val !== 'Sim';
+      dsNaoEl.hidden = val !== 'Não';
+    }
+    if (dsSelect) {
+      dsSelect.addEventListener('change', applyDsToggle);
+      applyDsToggle();
+    }
+
+    // ── Toggle: precisa formulário ──
+    const precisaFormSelect = document.querySelector('#precisa-form');
+    const formSimEl         = document.querySelector('[data-cond="form-sim"]');
+    if (precisaFormSelect) {
+      precisaFormSelect.addEventListener('change', () => {
+        formSimEl.hidden = precisaFormSelect.value !== 'Sim';
+      });
+    }
+
+    // ── Toggle: domínio ──
+    const dominioSelect = document.querySelector('#dominio');
+    const dominioSimEl  = document.querySelector('[data-cond="dominio-sim"]');
+    if (dominioSelect) {
+      dominioSelect.addEventListener('change', () => {
+        dominioSimEl.hidden = dominioSelect.value !== 'Sim';
+      });
+    }
+
+    // ── Color picker sync ──
+    function syncColorField(pickerId, hexId) {
+      const picker = document.querySelector(pickerId);
+      const hex    = document.querySelector(hexId);
+      if (!picker || !hex) return;
+      picker.addEventListener('input', () => { hex.value = picker.value; });
+      hex.addEventListener('input', () => {
+        if (/^#[0-9A-Fa-f]{6}$/.test(hex.value)) picker.value = hex.value;
+      });
+    }
+    syncColorField('#cor-primary-picker',       '#cor-primary-hex');
+    syncColorField('#cor-secondary-picker',     '#cor-secondary-hex');
+    syncColorField('#cor-accent-picker',        '#cor-accent-hex');
+    syncColorField('#cor-text-picker',          '#cor-text-hex');
+    syncColorField('#cor-bg-picker',            '#cor-bg-hex');
+    syncColorField('#cor-neutral-light-picker', '#cor-neutral-light-hex');
+    syncColorField('#cor-neutral-dark-picker',  '#cor-neutral-dark-hex');
+
+    // ── Estilo visual: radio → hidden input ──
+    const estiloHidden  = document.querySelector('#estilo-hidden');
+    const estiloOptions = document.querySelectorAll('.style-option');
+    document.querySelectorAll('input[name="estilo-radio"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        estiloOptions.forEach(opt => opt.classList.remove('is-selected'));
+        radio.closest('.style-option').classList.add('is-selected');
+        if (estiloHidden) estiloHidden.value = radio.value;
+      });
+    });
+
+    // ── Toggle: "Outro" em selects → caixa de texto ──
+    function bindOutroToggle(selectId) {
+      const select  = document.querySelector('#' + selectId);
+      const outroEl = document.querySelector('[data-outro-for="' + selectId + '"]');
+      if (!select || !outroEl) return;
+      select.addEventListener('change', () => {
+        const isOutro = select.value === 'Outro';
+        outroEl.hidden = !isOutro;
+        const input = outroEl.querySelector('input');
+        if (!isOutro && input) input.value = '';
+      });
+    }
+    bindOutroToggle('segmento');
+    bindOutroToggle('cta-principal');
+    bindOutroToggle('objetivo-site');
+    bindOutroToggle('form-segmento');
+    bindOutroToggle('tecnologia');
+
+    // ── Checkboxes fotos → hidden input ──
+    const fotosHidden = document.querySelector('#fotos-hidden');
+    document.querySelectorAll('.foto-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        const checked = Array.from(document.querySelectorAll('.foto-check:checked')).map(c => c.value);
+        if (fotosHidden) fotosHidden.value = checked.join(', ');
+      });
+    });
+
+    // ── PDF do Design System ──
+    document.querySelector('#btn-pdf')?.addEventListener('click', () => {
+      const val = id => document.querySelector('#' + id)?.value || '—';
+
+      document.querySelector('#pdf-brand-name').textContent = val('projeto');
+      document.querySelector('#pdf-date').textContent = new Date().toLocaleDateString('pt-BR');
+
+      const colors = [
+        { id: 'cor-primary-hex',       label: 'Principal' },
+        { id: 'cor-secondary-hex',     label: 'Secundária' },
+        { id: 'cor-accent-hex',        label: 'Destaque' },
+        { id: 'cor-text-hex',          label: 'Texto' },
+        { id: 'cor-bg-hex',            label: 'Fundo' },
+        { id: 'cor-neutral-light-hex', label: 'Neutro +' },
+        { id: 'cor-neutral-dark-hex',  label: 'Neutro −' },
+      ];
+      document.querySelector('#pdf-palette').innerHTML = colors.map(c => {
+        const hex = val(c.id);
+        return `<div style="text-align:center">
+          <div class="pdf-swatch-box" style="background:${hex}"></div>
+          <p class="pdf-swatch-name">${c.label}</p>
+          <p class="pdf-swatch-hex">${hex.toUpperCase()}</p>
+        </div>`;
+      }).join('');
+
+      const rows = pairs => pairs.map(([k, v]) =>
+        `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
+
+      document.querySelector('#pdf-identity tbody').innerHTML = rows([
+        ['Estilo Visual',  val('estilo-hidden')],
+        ['Tom de Voz',     val('tom-voz')],
+        ['Fonte do Site',  val('fonte-heading')],
+        ['Slogan',         val('slogan')],
+        ['Público-alvo',   val('publico')],
+        ['Personalidade',  val('personalidade')],
+      ]);
+
+      document.querySelector('#pdf-details tbody').innerHTML = rows([
+        ['Objetivo do Site', val('objetivo-site')],
+        ['CTA Principal',    val('cta-principal')],
+        ['Prazo',            val('prazo')],
+        ['Animações',        val('animacoes')],
+        ['Tecnologia',       val('tecnologia')],
+        ['Hospedagem',       val('hospedagem')],
+        ['Responsividade',   val('responsividade')],
+        ['Acessibilidade',   val('acessibilidade')],
+        ['Domínio',          val('dominio')],
+      ]);
+
+      const preview = document.querySelector('#pdf-preview');
+      preview.style.display = 'block';
+      window.print();
+      preview.style.display = 'none';
+    });
+  </script>
+</body>
+</html>

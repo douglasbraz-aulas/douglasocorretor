@@ -1,0 +1,127 @@
+/* depoimentos.css - Seção de Prova Social */
+.depoimentos {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  padding: var(--space-20) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.depoimentos__container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+
+.depoimentos__subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-2);
+}
+
+.depoimentos__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.depoimentos__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.depoimentos__card {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.depoimentos__card:hover {
+  transform: translateY(-5px);
+  border-color: var(--color-secondary);
+  box-shadow: var(--shadow-md);
+}
+
+.depoimentos__quote {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+  font-style: italic;
+  position: relative;
+}
+
+/* Aspas decorativas */
+.depoimentos__quote::before {
+  content: '“';
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  color: rgba(212, 175, 55, 0.2);
+  position: absolute;
+  top: -25px;
+  left: -10px;
+}
+
+.depoimentos__user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+.depoimentos__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-surface);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-lg);
+  border: 2px solid var(--color-secondary);
+}
+
+.depoimentos__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.depoimentos__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.depoimentos__role {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .depoimentos__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Preencha sua pré-avaliação e descubra se você está pronto para dar o próximo passo. Vagas limitadas.">
+  <meta property="og:title" content="Pré-Avaliação — Sua vaga está reservada">
+  <meta property="og:type" content="website">
+  <title>Pré-Avaliação — Garanta sua vaga</title>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--solid" role="banner">
+    <div class="header__inner">
+      <a href="#" class="header__logo" aria-label="Página inicial">
+        <!-- Substituir pelo logo real -->
+        Seu Programa
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="hero hero--centered" style="background:linear-gradient(160deg,#F8FAFC 50%,#EFF6FF 100%)" aria-labelledby="hero-titulo">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <span class="hero__label">Etapa 1 de 1 — Avaliação gratuita</span>
+          <h1 class="hero__title" id="hero-titulo">
+            Sua vaga está <em>pré-reservada</em>.<br>Preencha abaixo para confirmar.
+          </h1>
+          <p class="hero__subtitle">
+            Recebemos mais candidatos do que temos vagas. Por isso, preenchemos o formulário abaixo para conhecer seu momento atual e garantir que o programa vai entregar o resultado que você precisa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- POR QUE PREENCHER -->
+    <section class="why-section" aria-labelledby="why-titulo">
+      <div class="container">
+        <h2 class="section__title text-center" id="why-titulo" style="margin-bottom:var(--space-8);font-size:var(--text-2xl)">Por que pedimos essas informações?</h2>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-item__icon" aria-hidden="true">🎯</div>
+            <p class="why-item__text">
+              <strong>Para personalizar o atendimento</strong>
+              Cada pessoa chega com um ponto de partida diferente. Suas respostas nos ajudam a preparar a conversa certa para o seu caso.
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="why-item__icon" aria-hidden="true">🔒</div>
+            <p class="why-item__text">
+              <strong>Suas informações são confidenciais</strong>
+              Nenhum dado é compartilhado. Usamos apenas para preparar o contato inicial com você.
+            </p>
+          </div>
+          <div class="why-item">
+            <div class="why-item__icon" aria-hidden="true">⚡</div>
+            <p class="why-item__text">
+              <strong>Leva menos de 3 minutos</strong>
+              São 6 perguntas objetivas. Ao enviar, entraremos em contato em até 24 horas úteis.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO -->
+    <section id="formulario" class="section" aria-labelledby="form-titulo">
+      <div class="container">
+        <div class="form-card" style="max-width:640px;margin:0 auto">
+          <div class="form-card__header">
+            <h2 class="form-card__title" id="form-titulo">Preencha sua avaliação</h2>
+            <p class="form-card__subtitle">Todos os campos com * são obrigatórios</p>
+          </div>
+
+          <!-- Substituir 5511999999999 pelo número real e o título pelo nome real do programa -->
+          <form
+            class="form"
+            data-whatsapp-form
+            data-whatsapp-phone="5511999999999"
+            data-whatsapp-title="Pré-Avaliação — Novo Candidato"
+            novalidate
+          >
+
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label form__label--required" for="nome">Nome completo</label>
+                <input
+                  class="form__input"
+                  type="text"
+                  id="nome"
+                  name="nome"
+                  placeholder="Seu nome"
+                  required
+                  autocomplete="name"
+                  data-label="Nome"
+                >
+                <span class="form__error" id="erro-nome" data-error-for="nome" style="display:none">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12" stroke="white" stroke-width="2"/><line x1="12" y1="16" x2="12.01" y2="16" stroke="white" stroke-width="2"/></svg>
+                  Preencha seu nome
+                </span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="telefone">WhatsApp</label>
+                <input
+                  class="form__input"
+                  type="tel"
+                  id="telefone"
+                  name="telefone"
+                  placeholder="(11) 99999-9999"
+                  required
+                  autocomplete="tel"
+                  data-label="WhatsApp"
+                >
+                <span class="form__error" id="erro-telefone" data-error-for="telefone" style="display:none">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+                  Preencha seu WhatsApp
+                </span>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="email">E-mail</label>
+              <input
+                class="form__input"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="seu@email.com"
+                required
+                autocomplete="email"
+                data-label="E-mail"
+              >
+              <span class="form__error" id="erro-email" data-error-for="email" style="display:none">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>
+                Preencha seu e-mail
+              </span>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="situacao">Qual sua situação atual?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="situacao"
+                  name="situacao"
+                  required
+                  data-label="Situação atual"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="empregado-insatisfeito">Empregado, mas insatisfeito com o crescimento</option>
+                  <option value="empregado-buscando">Empregado e buscando nova oportunidade</option>
+                  <option value="desempregado">Em transição de carreira</option>
+                  <option value="empreendedor">Empreendedor querendo crescer</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="objetivo">Qual seu principal objetivo agora?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="objetivo"
+                  name="objetivo"
+                  required
+                  data-label="Objetivo principal"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="promocao">Conseguir uma promoção ou cargo melhor</option>
+                  <option value="aumento">Negociar aumento de salário</option>
+                  <option value="transicao">Fazer transição para outra área</option>
+                  <option value="linkedin">Melhorar meu posicionamento e LinkedIn</option>
+                  <option value="lideranca">Desenvolver habilidades de liderança</option>
+                  <option value="outro">Outro objetivo</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="investimento">Você está disposto a investir em sua carreira?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="investimento"
+                  name="investimento"
+                  required
+                  data-label="Disponibilidade de investimento"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="sim-imediato">Sim, estou pronto para começar agora</option>
+                  <option value="sim-30dias">Sim, mas preciso de até 30 dias para me organizar</option>
+                  <option value="talvez">Estou avaliando — depende do que for apresentado</option>
+                  <option value="nao">Ainda não estou em condições de investir</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="disponibilidade">Qual sua disponibilidade para uma conversa?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="disponibilidade"
+                  name="disponibilidade"
+                  required
+                  data-label="Disponibilidade para conversa"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="manha">Manhã (8h–12h)</option>
+                  <option value="tarde">Tarde (12h–18h)</option>
+                  <option value="noite">Noite (18h–21h)</option>
+                  <option value="qualquer">Qualquer horário</option>
+                </select>
+              </div>
+            </div>
+
+            <button class="btn btn--primary btn--lg btn--full" type="submit">
+              Enviar avaliação pelo WhatsApp
+            </button>
+
+            <p class="form__privacy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Seus dados são confidenciais e protegidos. Nunca vendemos ou compartilhamos informações.
+            </p>
+
+            <!-- Mensagem de sucesso -->
+            <div class="form__success" role="status" aria-live="polite">
+              <div class="form__success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="form__success-title">Avaliação enviada!</p>
+              <p class="form__success-text">Você será redirecionado ao WhatsApp para finalizar. Entraremos em contato em até 24 horas úteis.</p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer footer--simple" role="contentinfo">
+    <div class="footer__inner">
+      <p class="footer__copyright">© 2025 Seu Programa · Todos os direitos reservados</p>
+      <p class="footer__legal">Ao enviar este formulário você concorda com nossa política de privacidade. Nenhum dado é compartilhado com terceiros.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

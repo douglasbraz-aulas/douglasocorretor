@@ -1,0 +1,162 @@
+/* sobre.css - Seção Quem é Douglas o Corretor */
+.sobre {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: var(--space-20) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.sobre__container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+/* Ilustração / Detalhe visual do corretor */
+.sobre__media {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.sobre__box {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-lg);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  padding: var(--space-6);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sobre__box::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(5, 16, 32, 0) 80%);
+  pointer-events: none;
+}
+
+.sobre__box-icon {
+  font-size: var(--text-5xl);
+  margin-bottom: var(--space-4);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.sobre__box-title {
+  font-size: var(--text-2xl);
+  color: var(--color-surface);
+  margin-bottom: var(--space-2);
+}
+
+.sobre__box-subtitle {
+  font-size: var(--text-base);
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Conteúdo de Texto */
+.sobre__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.sobre__subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-2);
+}
+
+.sobre__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-6);
+}
+
+.sobre__text {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-8);
+}
+
+/* Grid de Destaques */
+.sobre__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.sobre__stat-card {
+  background-color: var(--color-surface);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+}
+
+.sobre__stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-secondary);
+}
+
+.sobre__stat-number {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.sobre__stat-label {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .sobre__container {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    text-align: center;
+  }
+
+  .sobre__media {
+    order: 2;
+  }
+
+  .sobre__stats {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+}

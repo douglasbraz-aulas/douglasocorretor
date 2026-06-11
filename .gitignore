@@ -1,0 +1,19 @@
+# OS files
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Project specific
+.gemini/
+node_modules/
+dist/
+build/

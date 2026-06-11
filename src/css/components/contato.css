@@ -1,0 +1,114 @@
+/* contato.css - Seção de Contato e Formulário WhatsApp */
+.contato {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: var(--space-20) 0;
+}
+
+.contato__container {
+  max-width: var(--container-md);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  text-align: center;
+}
+
+.contato__subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-2);
+}
+
+.contato__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.contato__description {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-10);
+  line-height: 1.6;
+}
+
+/* Formulário Card */
+.contato__form {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-8);
+  box-shadow: var(--shadow-lg);
+  text-align: left;
+}
+
+.contato__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.contato__group {
+  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
+}
+
+.contato__label {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-2);
+}
+
+.contato__input,
+.contato__select,
+.contato__textarea {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: var(--transition-base);
+  width: 100%;
+}
+
+.contato__input:focus,
+.contato__select:focus,
+.contato__textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+  box-shadow: 0 0 0 3px rgba(11, 34, 64, 0.15);
+}
+
+.contato__textarea {
+  resize: vertical;
+}
+
+.contato__btn-submit {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .contato__row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .contato__form {
+    padding: var(--space-6) var(--space-4);
+  }
+}

@@ -1,0 +1,166 @@
+/* header.css - Layout do Cabeçalho */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(11, 34, 64, 0.95); /* Azul Marinho com opacidade */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: var(--transition-base);
+}
+
+/* Transição ao rolar */
+.header--scrolled {
+  padding: var(--space-2) 0;
+  box-shadow: var(--shadow-md);
+  background-color: var(--color-primary-dark);
+}
+
+.header__container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  height: 100px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Navegação Desktop */
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.header__menu {
+  display: flex;
+  list-style: none;
+  gap: var(--space-6);
+}
+
+.header__menu-link {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-surface);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-2) 0;
+  position: relative;
+  transition: var(--transition-fast);
+}
+
+.header__menu-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-secondary); /* Dourado */
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.header__menu-link:hover {
+  color: var(--color-secondary);
+}
+
+.header__menu-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Hamburger Menu Mobile */
+.header__toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.header__toggle-bar {
+  width: 100%;
+  height: 3px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-full);
+  transition: var(--transition-base);
+}
+
+/* Estilos Responsivos */
+@media (max-width: 992px) {
+  .header__logo {
+    height: 60px;
+  }
+
+  .header__toggle {
+    display: flex;
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background-color: var(--color-primary-dark);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: var(--space-24) var(--space-8) var(--space-8);
+    gap: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .header__nav--active {
+    right: 0;
+  }
+
+  .header__menu {
+    flex-direction: column;
+    width: 100%;
+    gap: var(--space-4);
+  }
+
+  .header__menu-link {
+    display: block;
+    font-size: var(--text-base);
+    padding: var(--space-3) 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  /* Hamburger Animado */
+  .header__toggle--active .header__toggle-bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .header__toggle--active .header__toggle-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header__toggle--active .header__toggle-bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+}

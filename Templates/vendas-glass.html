@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shift — Mentoria Tech & Carreira. Faça a transição para o tech e construa uma carreira internacional.">
+  <meta property="og:title" content="Shift — Mentoria Tech & Carreira · De zero ao primeiro emprego">
+  <meta property="og:type" content="website">
+  <title>Shift — Mentoria Tech & Carreira</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    /* ── Tokens Shift ── */
+    :root {
+      --sh-bg:      #0D0F1A;
+      --sh-surface: rgba(255,255,255,0.05);
+      --sh-border:  rgba(255,255,255,0.1);
+      --sh-text:    #F1F5F9;
+      --sh-muted:   rgba(241,245,249,0.5);
+      --sh-cyan:    #22D3EE;
+      --sh-violet:  #818CF8;
+      --sh-pink:    #F472B6;
+      --sh-green:   #4ADE80;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background: var(--sh-bg);
+      color: var(--sh-text);
+      min-height: 100vh;
+    }
+
+    /* Gradient mesh de fundo fixo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background:
+        radial-gradient(ellipse at 15% 30%, rgba(34,211,238,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 85% 20%, rgba(129,140,248,0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(244,114,182,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(74,222,128,0.07) 0%, transparent 40%);
+    }
+
+    /* ── Header glass ── */
+    .header--sh {
+      background: rgba(13,15,26,0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--sh-border);
+    }
+    .header--sh .header__logo {
+      color: var(--sh-text);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: -0.02em;
+    }
+    .btn--sh {
+      background: linear-gradient(135deg, var(--sh-cyan), var(--sh-violet));
+      color: #FFFFFF;
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--text-sm);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      border: none;
+      cursor: pointer;
+      transition: opacity var(--transition-base), transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .btn--sh:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(34,211,238,0.3);
+    }
+    .btn--sh--lg {
+      font-size: var(--text-base);
+      padding: var(--space-4) var(--space-8);
+    }
+    .btn--sh--outline {
+      background: transparent;
+      border: 1px solid var(--sh-border);
+      color: var(--sh-text);
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-full);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      transition: border-color var(--transition-base), background var(--transition-base);
+    }
+    .btn--sh--outline:hover { border-color: var(--sh-cyan); background: rgba(34,211,238,0.08); }
+
+    /* ── Glass card base ── */
+    .glass {
+      background: var(--sh-surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--sh-border);
+      border-radius: var(--radius-xl);
+    }
+    .glass--lg { border-radius: var(--radius-2xl); }
+
+    /* ── Hero ── */
+    .hero-sh {
+      padding: calc(var(--header-height) + var(--space-20)) 0 var(--space-20);
+      text-align: center;
+    }
+    .hero-sh__pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: rgba(34,211,238,0.1);
+      border: 1px solid rgba(34,211,238,0.3);
+      color: var(--sh-cyan);
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      padding: var(--space-1) var(--space-4);
+      border-radius: var(--radius-full);
+      margin-bottom: var(--space-6);
+    }
+    .hero-sh__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--sh-cyan);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero-sh__title {
+      font-size: clamp(2.25rem, 6vw, 4.5rem);
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-text);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 760px;
+      margin: 0 auto var(--space-6);
+    }
+    .hero-sh__title .grad {
+      background: linear-gradient(135deg, var(--sh-cyan), var(--sh-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sh__sub {
+      font-size: var(--text-lg);
+      color: var(--sh-muted);
+      max-width: 520px;
+      margin: 0 auto var(--space-10);
+      line-height: var(--line-height-relaxed);
+    }
+    .hero-sh__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      justify-content: center;
+      margin-bottom: var(--space-12);
+    }
+    .hero-sh__stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-2);
+    }
+    .stat-pill {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--sh-surface);
+      border: 1px solid var(--sh-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--sh-muted);
+    }
+    .stat-pill__val { font-weight: var(--font-weight-semibold); color: var(--sh-text); }
+
+    /* ── Para quem ── */
+    .para-quem-sh { padding: var(--space-20) 0; }
+    .sec-label {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sh-cyan);
+      margin-bottom: var(--space-3);
+    }
+    .sec-title-sh {
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-text);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      max-width: 560px;
+      margin-bottom: var(--space-12);
+    }
+    .cards-grid-3 {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .cards-grid-3 { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .cards-grid-3 { grid-template-columns: repeat(3, 1fr); } }
+
+    .para-quem-card {
+      padding: var(--space-6);
+    }
+    .para-quem-card__icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-4);
+    }
+    .para-quem-card__title {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-text);
+      margin-bottom: var(--space-2);
+    }
+    .para-quem-card__text {
+      font-size: var(--text-sm);
+      color: var(--sh-muted);
+      line-height: var(--line-height-relaxed);
+    }
+
+    /* ── O que aprende ── */
+    .aprende-sh { padding: var(--space-20) 0; }
+    .aprende-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) { .aprende-grid { grid-template-columns: repeat(2, 1fr); } }
+    .aprende-item {
+      padding: var(--space-6);
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+      transition: background var(--transition-base);
+    }
+    .aprende-item:hover { background: rgba(255,255,255,0.07); }
+    .aprende-item__num {
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-cyan);
+      width: 24px;
+      flex-shrink: 0;
+      padding-top: 3px;
+    }
+    .aprende-item__title {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--sh-text);
+      margin-bottom: var(--space-1);
+    }
+    .aprende-item__text {
+      font-size: var(--text-sm);
+      color: var(--sh-muted);
+      line-height: var(--line-height-relaxed);
+    }
+
+    /* ── Depoimentos ── */
+    .deps-sh { padding: var(--space-20) 0; }
+    .deps-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .deps-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .deps-grid { grid-template-columns: repeat(3, 1fr); } }
+    .dep-sh {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+    }
+    .dep-sh__result {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-semibold);
+      color: var(--sh-green);
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.25);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      width: fit-content;
+    }
+    .dep-sh__quote { font-size: var(--text-sm); color: var(--sh-muted); line-height: var(--line-height-relaxed); flex: 1; }
+    .dep-sh__author { display: flex; align-items: center; gap: var(--space-3); }
+    .dep-sh__avatar {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--sh-cyan), var(--sh-violet));
+      display: flex; align-items: center; justify-content: center;
+      font-size: var(--text-xs); font-weight: var(--font-weight-bold); color: #FFF;
+    }
+    .dep-sh__name { font-size: var(--text-sm); font-weight: var(--font-weight-semibold); color: var(--sh-text); }
+    .dep-sh__role { font-size: var(--text-xs); color: var(--sh-muted); }
+
+    /* ── Planos ── */
+    .planos-sh { padding: var(--space-20) 0; }
+    .planos-grid {
+      display: grid;
+      gap: var(--space-5);
+      grid-template-columns: 1fr;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    @media (min-width: 640px) { .planos-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .plano-card {
+      padding: var(--space-8);
+      position: relative;
+      transition: transform var(--transition-base);
+    }
+    .plano-card:hover { transform: translateY(-6px); }
+    .plano-card--destaque {
+      border-color: var(--sh-cyan);
+      box-shadow: 0 0 40px rgba(34,211,238,0.15);
+    }
+    .plano-card__badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--sh-cyan), var(--sh-violet));
+      color: #000;
+      font-size: var(--text-xs);
+      font-weight: var(--font-weight-bold);
+      padding: var(--space-1) var(--space-4);
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+    }
+    .plano-card__name {
+      font-size: var(--text-xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-text);
+      margin-bottom: var(--space-2);
+    }
+    .plano-card__price {
+      font-size: 2.5rem;
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-text);
+      line-height: 1;
+    }
+    .plano-card__price span {
+      font-size: var(--text-base);
+      font-weight: var(--font-weight-normal);
+      color: var(--sh-muted);
+    }
+    .plano-card__installment { font-size: var(--text-sm); color: var(--sh-muted); margin: var(--space-2) 0 var(--space-5); }
+    .plano-card__divider { height: 1px; background: var(--sh-border); margin: var(--space-5) 0; }
+    .plano-card__features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      margin-bottom: var(--space-7);
+    }
+    .plano-card__features li {
+      display: flex;
+      gap: var(--space-3);
+      align-items: flex-start;
+      font-size: var(--text-sm);
+      color: var(--sh-muted);
+    }
+    .plano-card__features li::before {
+      content: '✓';
+      color: var(--sh-cyan);
+      font-weight: var(--font-weight-bold);
+      flex-shrink: 0;
+    }
+    .plano-card__features li.disabled { opacity: 0.35; }
+    .plano-card__features li.disabled::before { content: '—'; color: var(--sh-muted); }
+
+    /* ── Garantia ── */
+    .garantia-sh {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--space-8);
+      display: flex;
+      gap: var(--space-5);
+      align-items: flex-start;
+      border-left: 3px solid var(--sh-cyan);
+    }
+    .garantia-sh__badge {
+      width: 64px; height: 64px; flex-shrink: 0;
+      border-radius: 50%;
+      background: rgba(34,211,238,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.75rem;
+    }
+    .garantia-sh__title { font-size: var(--text-lg); font-weight: var(--font-weight-bold); color: var(--sh-text); margin-bottom: var(--space-2); }
+    .garantia-sh__text { font-size: var(--text-sm); color: var(--sh-muted); line-height: var(--line-height-relaxed); }
+
+    /* ── FAQ (override para tema dark — reutiliza .faq__* do faq.css) ── */
+    .faq-sh { max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--space-3); }
+    .faq__item { overflow: hidden; }
+    .faq__question {
+      width: 100%; background: none; border: none; padding: var(--space-5) var(--space-6);
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; font-size: var(--text-base); font-weight: var(--font-weight-semibold);
+      color: var(--sh-text); text-align: left; gap: var(--space-3);
+    }
+    .faq__icon {
+      width: 20px; height: 20px; flex-shrink: 0;
+      border: 1px solid var(--sh-border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; color: var(--sh-cyan); transition: transform var(--transition-base);
+    }
+    .faq__item.is-open .faq__icon { transform: rotate(45deg); }
+    .faq__answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq__item.is-open .faq__answer { max-height: 300px; }
+    .faq__answer-inner { padding: 0 var(--space-6) var(--space-5); color: var(--sh-muted); font-size: var(--text-sm); line-height: var(--line-height-relaxed); }
+
+    /* ── CTA final ── */
+    .cta-sh { padding: var(--space-24) 0; text-align: center; }
+    .cta-sh__card {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: var(--space-12) var(--space-8);
+      background: linear-gradient(135deg, rgba(34,211,238,0.08), rgba(129,140,248,0.08));
+      border: 1px solid rgba(34,211,238,0.2);
+      border-radius: var(--radius-2xl);
+    }
+    .cta-sh__title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: var(--font-weight-bold);
+      color: var(--sh-text);
+      line-height: 1.15;
+      margin-bottom: var(--space-4);
+    }
+    .cta-sh__title .grad {
+      background: linear-gradient(135deg, var(--sh-cyan), var(--sh-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .cta-sh__sub { color: var(--sh-muted); font-size: var(--text-base); margin-bottom: var(--space-8); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header header--solid header--sh" role="banner">
+    <div class="header__inner">
+      <a href="#" class="header__logo" aria-label="Shift Mentoria Tech — Página inicial">
+        SHIFT
+      </a>
+      <a
+        href="#planos"
+        class="btn--sh"
+        aria-label="Ver planos de mentoria"
+      >
+        Ver planos
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" class="hero-sh" aria-labelledby="hero-titulo">
+      <div class="container">
+        <div class="hero-sh__pill">
+          <span class="hero-sh__dot" aria-hidden="true"></span>
+          Turma aberta — 23 vagas disponíveis
+        </div>
+        <h1 class="hero-sh__title" id="hero-titulo">
+          Da sua área atual para o <span class="grad">mercado tech</span> em 6 meses
+        </h1>
+        <p class="hero-sh__sub">A mentoria que já ajudou +800 profissionais a fazer a transição de carreira para tech — com emprego real no final.</p>
+        <div class="hero-sh__ctas">
+          <a href="#planos" class="btn--sh btn--sh--lg">Quero fazer minha transição</a>
+          <a href="#como-funciona" class="btn--sh--outline">Como funciona →</a>
+        </div>
+        <div class="hero-sh__stats">
+          <span class="stat-pill"><span class="stat-pill__val">800+</span> transições realizadas</span>
+          <span class="stat-pill"><span class="stat-pill__val">92%</span> empregados em 6 meses</span>
+          <span class="stat-pill"><span class="stat-pill__val">+120%</span> aumento médio de salário</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARA QUEM -->
+    <section class="para-quem-sh" aria-labelledby="paraquem-titulo">
+      <div class="container">
+        <p class="sec-label">Para quem é</p>
+        <h2 class="sec-title-sh" id="paraquem-titulo">Para você que quer sair do zero e entrar no mercado tech</h2>
+        <div class="cards-grid-3">
+          <div class="para-quem-card glass">
+            <div class="para-quem-card__icon">🚀</div>
+            <h3 class="para-quem-card__title">Transição de carreira</h3>
+            <p class="para-quem-card__text">Profissional de qualquer área que quer migrar para tech — sem experiência prévia em programação ou dados.</p>
+          </div>
+          <div class="para-quem-card glass">
+            <div class="para-quem-card__icon">💻</div>
+            <h3 class="para-quem-card__title">Dev iniciante travado</h3>
+            <p class="para-quem-card__text">Você já aprendeu o básico por conta própria, mas não sabe como conseguir o primeiro emprego e construir portfólio real.</p>
+          </div>
+          <div class="para-quem-card glass">
+            <div class="para-quem-card__icon">🌎</div>
+            <h3 class="para-quem-card__title">Carreira internacional</h3>
+            <p class="para-quem-card__text">Quer trabalhar remoto para empresa estrangeira — e não sabe por onde começar no processo seletivo global.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- O QUE APRENDE -->
+    <section id="como-funciona" class="aprende-sh" aria-labelledby="aprende-titulo">
+      <div class="container">
+        <p class="sec-label">O que você domina</p>
+        <h2 class="sec-title-sh" id="aprende-titulo">Tudo que precisa para conseguir o emprego — e prosperar nele</h2>
+        <div class="aprende-grid">
+          <div class="aprende-item glass">
+            <span class="aprende-item__num">01</span>
+            <div>
+              <h3 class="aprende-item__title">Fundamentos técnicos sólidos</h3>
+              <p class="aprende-item__text">HTML, CSS, JavaScript, Git, lógica de programação e conceitos de backend — com projetos reais desde o início.</p>
+            </div>
+          </div>
+          <div class="aprende-item glass">
+            <span class="aprende-item__num">02</span>
+            <div>
+              <h3 class="aprende-item__title">Portfólio que contrata</h3>
+              <p class="aprende-item__text">Como construir projetos que impressionam recrutadores — não apenas tutoriais clone que todo mundo tem.</p>
+            </div>
+          </div>
+          <div class="aprende-item glass">
+            <span class="aprende-item__num">03</span>
+            <div>
+              <h3 class="aprende-item__title">LinkedIn e personal brand tech</h3>
+              <p class="aprende-item__text">Posicione seu perfil para que recrutadores internacionais venham até você — não o contrário.</p>
+            </div>
+          </div>
+          <div class="aprende-item glass">
+            <span class="aprende-item__num">04</span>
+            <div>
+              <h3 class="aprende-item__title">Entrevistas técnicas e soft skills</h3>
+              <p class="aprende-item__text">Simulações de entrevista, code challenges, behavioral questions e negociação de salário em inglês.</p>
+            </div>
+          </div>
+          <div class="aprende-item glass">
+            <span class="aprende-item__num">05</span>
+            <div>
+              <h3 class="aprende-item__title">Mercado internacional</h3>
+              <p class="aprende-item__text">Onde procurar vagas, como aplicar, como passar no processo seletivo de empresas dos EUA e Europa.</p>
+            </div>
+          </div>
+          <div class="aprende-item glass">
+            <span class="aprende-item__num">06</span>
+            <div>
+              <h3 class="aprende-item__title">Inglês técnico funcional</h3>
+              <p class="aprende-item__text">Comunicação técnica em inglês: e-mails, reuniões, pull requests, documentação e conversas com times remotos.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEPOIMENTOS -->
+    <section class="deps-sh" aria-labelledby="dep-titulo">
+      <div class="container">
+        <p class="sec-label">Quem já fez a transição</p>
+        <h2 class="sec-title-sh" id="dep-titulo" style="margin-bottom:var(--space-10)">Resultados reais, não exceções</h2>
+        <div class="deps-grid">
+          <div class="dep-sh glass">
+            <span class="dep-sh__result">✓ Contratada em startup EUA</span>
+            <p class="dep-sh__quote">"Sai da área de marketing sem saber uma linha de código. Em 5 meses tava fazendo entrevistas em inglês. Em 7 meses fui contratada por uma startup americana."</p>
+            <div class="dep-sh__author">
+              <div class="dep-sh__avatar" aria-hidden="true">AC</div>
+              <div>
+                <p class="dep-sh__name">Ana Claudia V.</p>
+                <p class="dep-sh__role">Frontend Developer · Remoto EUA</p>
+              </div>
+            </div>
+          </div>
+          <div class="dep-sh glass">
+            <span class="dep-sh__result">✓ Salário triplicou</span>
+            <p class="dep-sh__quote">"Ganhava R$ 4.000 como gerente de loja. Hoje ganho R$ 14.000 como dev júnior. E ainda trabalho de casa. Parecia impossível — aconteceu em 6 meses."</p>
+            <div class="dep-sh__author">
+              <div class="dep-sh__avatar" aria-hidden="true">MF</div>
+              <div>
+                <p class="dep-sh__name">Marcos F.</p>
+                <p class="dep-sh__role">Fullstack Developer · Empresa Portuguesa</p>
+              </div>
+            </div>
+          </div>
+          <div class="dep-sh glass">
+            <span class="dep-sh__result">✓ 3 ofertas no primeiro mês de busca</span>
+            <p class="dep-sh__quote">"O que me diferenciou foi o portfólio. O mentor me ajudou a construir projetos que mostram raciocínio, não só código copiado. Recebi 3 ofertas na primeira semana ativa."</p>
+            <div class="dep-sh__author">
+              <div class="dep-sh__avatar" aria-hidden="true">TL</div>
+              <div>
+                <p class="dep-sh__name">Thais Lima</p>
+                <p class="dep-sh__role">Backend Developer · Startup Holandesa</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANOS -->
+    <section id="planos" class="planos-sh" aria-labelledby="planos-titulo">
+      <div class="container">
+        <p class="sec-label">Invista</p>
+        <h2 class="sec-title-sh" id="planos-titulo" style="margin-bottom:var(--space-12)">Escolha o plano certo para você</h2>
+        <div class="planos-grid">
+          <div class="plano-card glass">
+            <p class="plano-card__name">Shift Essencial</p>
+            <p class="plano-card__price">R$ 997<span>/único</span></p>
+            <p class="plano-card__installment">ou 10x de R$ 107</p>
+            <div class="plano-card__divider"></div>
+            <ul class="plano-card__features">
+              <li>Acesso a todos os módulos gravados</li>
+              <li>Comunidade no Discord</li>
+              <li>Templates de CV e LinkedIn</li>
+              <li>Acesso por 12 meses</li>
+              <li class="disabled">Sessões ao vivo com mentor</li>
+              <li class="disabled">Revisão de portfólio individual</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Quero%20o%20Shift%20Essencial" class="btn--sh--outline" style="width:100%;justify-content:center" target="_blank" rel="noopener noreferrer">
+              Começar com Essencial
+            </a>
+          </div>
+          <div class="plano-card glass plano-card--destaque">
+            <span class="plano-card__badge">Mais escolhido ✦</span>
+            <p class="plano-card__name">Shift Completo</p>
+            <p class="plano-card__price">R$ 2.497<span>/único</span></p>
+            <p class="plano-card__installment">ou 12x de R$ 237</p>
+            <div class="plano-card__divider"></div>
+            <ul class="plano-card__features">
+              <li>Tudo do Essencial</li>
+              <li>8 sessões ao vivo com mentor</li>
+              <li>2 revisões de portfólio individuais</li>
+              <li>Simulação de entrevista técnica</li>
+              <li>Acesso vitalício</li>
+              <li>Suporte prioritário por 6 meses</li>
+            </ul>
+            <a href="https://wa.me/5511999999999?text=Quero%20o%20Shift%20Completo" class="btn--sh" style="width:100%;justify-content:center" target="_blank" rel="noopener noreferrer">
+              Garantir Shift Completo →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GARANTIA -->
+    <section class="section section--sm" aria-labelledby="gar-titulo">
+      <div class="container">
+        <div class="garantia-sh glass">
+          <div class="garantia-sh__badge" aria-hidden="true">🔐</div>
+          <div>
+            <h2 class="garantia-sh__title" id="gar-titulo">Garantia de 14 dias</h2>
+            <p class="garantia-sh__text">Acesse o programa por 14 dias. Se sentir que não é para você por qualquer motivo, devolvemos 100% do valor — sem perguntas. Queremos que você faça porque quer, não porque está preso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" aria-labelledby="faq-titulo">
+      <div class="container">
+        <p class="sec-label" style="text-align:center;display:block;margin-bottom:var(--space-3)">Dúvidas</p>
+        <h2 class="sec-title-sh" id="faq-titulo" style="text-align:center;max-width:440px;margin:0 auto var(--space-10)">Perguntas frequentes</h2>
+        <div class="faq" role="list">
+          <div class="faq__item glass" role="listitem">
+            <button class="faq__question" aria-expanded="false">
+              Preciso saber programar para entrar?
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__answer">
+              <div class="faq__answer-inner">Não. O Shift Completo começa do zero absoluto. O único requisito é ter um computador e comprometimento.</div>
+            </div>
+          </div>
+          <div class="faq__item glass" role="listitem">
+            <button class="faq__question" aria-expanded="false">
+              Em quanto tempo consigo o primeiro emprego?
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__answer">
+              <div class="faq__answer-inner">92% dos nossos alunos do plano Completo conseguem o primeiro emprego em até 6 meses. Isso depende da dedicação — quem segue o método com consistência chega lá.</div>
+            </div>
+          </div>
+          <div class="faq__item glass" role="listitem">
+            <button class="faq__question" aria-expanded="false">
+              Precisa ter inglês fluente para o plano internacional?
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__answer">
+              <div class="faq__answer-inner">Inglês intermediário já é suficiente para começar. O programa inclui treinamento de inglês técnico funcional para comunicação em ambientes de trabalho internacionais.</div>
+            </div>
+          </div>
+          <div class="faq__item glass" role="listitem">
+            <button class="faq__question" aria-expanded="false">
+              O acesso vitalício inclui atualizações futuras?
+              <span class="faq__icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq__answer">
+              <div class="faq__answer-inner">Sim. Sempre que o conteúdo for atualizado, você recebe o acesso automaticamente — sem custo adicional. O mercado tech muda rápido e nós acompanhamos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="cta-sh" aria-labelledby="cta-titulo">
+      <div class="container">
+        <div class="cta-sh__card">
+          <h2 class="cta-sh__title" id="cta-titulo">
+            Faça o <span class="grad">Shift</span> que sua carreira precisa agora
+          </h2>
+          <p class="cta-sh__sub">Não espere mais. As vagas desta turma são limitadas e o mercado tech não espera.</p>
+          <a href="#planos" class="btn--sh btn--sh--lg">
+            Quero entrar no Shift →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer footer--simple" role="contentinfo" style="background:rgba(255,255,255,0.03);border-top:1px solid var(--sh-border)">
+    <div class="footer__inner" style="color:rgba(241,245,249,0.5)">
+      <p class="footer__logo" style="color:var(--sh-text)">SHIFT</p>
+      <p class="footer__copyright" style="color:rgba(241,245,249,0.4)">© 2025 Shift Mentoria Tech & Carreira · Todos os direitos reservados</p>
+      <p class="footer__legal" style="color:rgba(241,245,249,0.3)">Os resultados apresentados são individuais. O sucesso depende do esforço e comprometimento de cada aluno.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Felipe Duarte — Fotógrafo e Videomaker. Casamentos, ensaios e projetos editoriais em São Paulo.">
+  <title>Felipe Duarte — Fotógrafo</title>
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    :root {
+      --ph-gold:   #C9A84C;
+      --ph-gold-lt:#FDF6E3;
+      --ph-dark:   #0A0A0A;
+      --ph-mid:    #1A1A1A;
+      --ph-border: rgba(255,255,255,0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body { background: var(--ph-dark); color: rgba(255,255,255,0.85); }
+
+    /* ── Header flutuante ── */
+    .hdr {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: var(--space-5) var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, rgba(10,10,10,0.9) 0%, transparent 100%);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .hdr__logo {
+      font-size: var(--text-lg);
+      font-weight: var(--font-weight-bold);
+      color: #FFFFFF;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .hdr__logo span { color: var(--ph-gold); }
+    .hdr__nav {
+      display: none;
+      list-style: none;
+      gap: var(--space-8);
+    }
+    @media (min-width: 768px) { .hdr__nav { display: flex; } }
+    .hdr__nav a {
+      font-size: var(--text-sm);
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 0.05em;
+      transition: color var(--transition-fast);
+    }
+    .hdr__nav a:hover { color: #FFFFFF; }
+    .hdr__cta {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-semibold);
+      color: var(--ph-dark);
+      background: var(--ph-gold);
+      padding: var(--space-2) var(--space-5);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: opacity var(--transition-fast);
+    }
+    .hdr__cta:hover { opacity: 0.85; }
+
+    /* ── Hero — grade de fotos ── */
+    .hero-ph {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-ph__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 100vh;
+    }
+    @media (min-width: 768px) {
+      .hero-ph__grid { grid-template-columns: 1.5fr 1fr 1fr; }
+    }
+    .hero-ph__cell {
+      background: #1A1A1A;
+      position: relative;
+      overflow: hidden;
+      transition: filter var(--transition-slow);
+    }
+    .hero-ph__cell:hover { filter: brightness(1.15); }
+    .hero-ph__cell::after {
+      content: attr(data-label);
+      position: absolute;
+      bottom: var(--space-3);
+      left: var(--space-3);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.35);
+      background: rgba(0,0,0,0.4);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .hero-ph__cell:nth-child(1) { background: #141414; }
+    .hero-ph__cell:nth-child(2) { background: #111111; }
+    .hero-ph__cell:nth-child(3) { background: #0E0E0E; }
+    .hero-ph__placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      opacity: 0.2;
+    }
+    .hero-ph__placeholder svg { width: 48px; height: 48px; color: #fff; }
+    .hero-ph__placeholder p { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: 0.15em; }
+    /* Overlay sobre a grade */
+    .hero-ph__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10,10,10,0.65) 0%, transparent 50%, rgba(10,10,10,0.4) 100%);
+      pointer-events: none;
+    }
+    /* Conteúdo sobre o grid */
+    .hero-ph__content {
+      position: absolute;
+      bottom: var(--space-16);
+      left: 0;
+      padding: 0 var(--space-8);
+      z-index: 10;
+    }
+    @media (min-width: 768px) { .hero-ph__content { padding: 0 var(--space-16); } }
+    .hero-ph__eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ph-gold);
+      margin-bottom: var(--space-4);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .hero-ph__eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--ph-gold); }
+    .hero-ph__name {
+      font-size: clamp(2.5rem, 7vw, 5.5rem);
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-4);
+    }
+    .hero-ph__sub {
+      font-size: var(--text-lg);
+      color: rgba(255,255,255,0.55);
+      font-weight: var(--font-weight-normal);
+      margin-bottom: var(--space-8);
+    }
+    .hero-ph__ctas { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+    .btn-gold {
+      background: var(--ph-gold);
+      color: var(--ph-dark);
+      font-weight: 700;
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-7);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: opacity var(--transition-fast), transform var(--transition-fast);
+    }
+    .btn-gold:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline-white {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.75);
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+      padding: var(--space-3) var(--space-7);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background var(--transition-fast);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.08); }
+
+    /* ── Scroll indicator ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: var(--space-6);
+      right: var(--space-8);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-2);
+      opacity: 0.45;
+    }
+    .scroll-hint span { font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: #fff; writing-mode: vertical-rl; }
+    .scroll-hint__line { width: 1px; height: 48px; background: rgba(255,255,255,0.4); }
+
+    /* ── Seção genérica dark ── */
+    .section-dark { background: var(--ph-dark); padding: var(--space-20) 0; }
+    .section-mid  { background: var(--ph-mid);  padding: var(--space-20) 0; }
+
+    .eyebrow-gold {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--ph-gold);
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+    }
+    .eyebrow-gold::before { content: ''; width: 24px; height: 1px; background: var(--ph-gold); }
+
+    /* ── Sobre ── */
+    .sobre-ph__layout {
+      display: grid;
+      gap: var(--space-16);
+      align-items: center;
+    }
+    @media (min-width: 768px) { .sobre-ph__layout { grid-template-columns: 300px 1fr; } }
+    .sobre-ph__foto {
+      aspect-ratio: 3/4;
+      background: #1A1A1A;
+      border-radius: var(--radius-xl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.1);
+      font-size: var(--text-xs);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .sobre-ph__foto::after {
+      content: 'Foto do fotógrafo\A3:4 · Substituir';
+      white-space: pre;
+      text-align: center;
+      opacity: 0.3;
+      font-size: var(--text-xs);
+      letter-spacing: 0.08em;
+    }
+    .sobre-ph__title {
+      font-size: clamp(1.75rem, 4vw, 2.75rem);
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-6);
+    }
+    .sobre-ph__body {
+      color: rgba(255,255,255,0.55);
+      line-height: var(--line-height-relaxed);
+      margin-bottom: var(--space-4);
+    }
+    .sobre-ph__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--ph-border);
+    }
+    .stat-ph__value { font-size: var(--text-3xl); font-weight: 900; color: var(--ph-gold); display: block; }
+    .stat-ph__label { font-size: var(--text-xs); color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ── Portfólio ── */
+    .portfolio-ph {
+      display: grid;
+      gap: var(--space-3);
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 240px;
+    }
+    @media (min-width: 768px) {
+      .portfolio-ph { grid-template-columns: repeat(3, 1fr); grid-auto-rows: 280px; }
+      .portfolio-ph__item--wide  { grid-column: span 2; }
+      .portfolio-ph__item--tall  { grid-row:    span 2; }
+    }
+    .portfolio-ph__item {
+      background: #1A1A1A;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform var(--transition-base);
+    }
+    .portfolio-ph__item:hover { transform: scale(1.015); }
+    .portfolio-ph__item:hover .portfolio-ph__info { opacity: 1; }
+    .portfolio-ph__img {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.08);
+      font-size: 3rem;
+    }
+    .portfolio-ph__placeholder {
+      position: absolute;
+      bottom: var(--space-2);
+      right: var(--space-2);
+      font-size: 10px;
+      background: rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.4);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .portfolio-ph__info {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, transparent 60%);
+      padding: var(--space-5);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      opacity: 0;
+      transition: opacity var(--transition-base);
+    }
+    .portfolio-ph__info-title { font-size: var(--text-base); font-weight: 700; color: #FFFFFF; }
+    .portfolio-ph__info-tag   { font-size: var(--text-xs); color: var(--ph-gold); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* ── Serviços ── */
+    .servicos-ph-grid {
+      display: grid;
+      gap: var(--space-1);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 768px) { .servicos-ph-grid { grid-template-columns: repeat(3, 1fr); } }
+    .servico-ph {
+      border: 1px solid var(--ph-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8);
+      transition: border-color var(--transition-base), background var(--transition-base);
+    }
+    .servico-ph:hover { border-color: var(--ph-gold); background: rgba(201,168,76,0.04); }
+    .servico-ph__num { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.15em; color: var(--ph-gold); text-transform: uppercase; margin-bottom: var(--space-5); }
+    .servico-ph__title { font-size: var(--text-xl); font-weight: 700; color: #FFFFFF; margin-bottom: var(--space-3); }
+    .servico-ph__text { font-size: var(--text-sm); color: rgba(255,255,255,0.5); line-height: var(--line-height-relaxed); margin-bottom: var(--space-5); }
+    .servico-ph__includes {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .servico-ph__includes li {
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+    .servico-ph__includes li::before { content: '–'; color: var(--ph-gold); }
+
+    /* ── Depoimentos ── */
+    .deps-ph-grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr; }
+    @media (min-width: 768px) { .deps-ph-grid { grid-template-columns: repeat(2, 1fr); } }
+    .dep-ph {
+      border: 1px solid var(--ph-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-7);
+    }
+    .dep-ph__quote { font-size: 2.5rem; line-height: 1; color: var(--ph-gold); opacity: 0.4; font-weight: 900; margin-bottom: var(--space-3); }
+    .dep-ph__text { font-size: var(--text-sm); color: rgba(255,255,255,0.6); line-height: var(--line-height-relaxed); margin-bottom: var(--space-5); font-style: italic; }
+    .dep-ph__footer { display: flex; align-items: center; gap: var(--space-3); }
+    .dep-ph__avatar { width: 38px; height: 38px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); display: flex; align-items: center; justify-content: center; font-size: var(--text-xs); font-weight: 700; color: var(--ph-gold); flex-shrink: 0; }
+    .dep-ph__name { font-size: var(--text-sm); font-weight: 700; color: #FFFFFF; }
+    .dep-ph__role { font-size: var(--text-xs); color: rgba(255,255,255,0.35); }
+
+    /* ── CTA ── */
+    .cta-ph {
+      background: linear-gradient(135deg, #0A0A0A 0%, #1A1200 100%);
+      border-top: 1px solid var(--ph-border);
+      padding: var(--space-20) 0;
+      text-align: center;
+    }
+    .cta-ph__title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #FFFFFF; line-height: 1.05; letter-spacing: -0.025em; margin-bottom: var(--space-4); }
+    .cta-ph__title em { color: var(--ph-gold); font-style: normal; }
+    .cta-ph__sub { color: rgba(255,255,255,0.4); font-size: var(--text-base); margin-bottom: var(--space-8); }
+    .cta-ph__ctas { display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap; }
+
+    /* footer dark simples */
+    .footer-ph {
+      background: #050505;
+      border-top: 1px solid var(--ph-border);
+      padding: var(--space-8) 0;
+      text-align: center;
+    }
+    .footer-ph p { font-size: var(--text-sm); color: rgba(255,255,255,0.25); }
+    .footer-ph a { color: rgba(255,255,255,0.4); text-decoration: none; }
+    .footer-ph a:hover { color: rgba(255,255,255,0.7); }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="hdr" role="banner">
+    <a href="#" class="hdr__logo" aria-label="Felipe Duarte Fotógrafo — Início">
+      Felipe<span>.</span>
+    </a>
+    <nav aria-label="Navegação">
+      <ul class="hdr__nav">
+        <li><a href="#portfolio">Portfólio</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a href="#contato" class="hdr__cta">Reservar data</a>
+  </header>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <main>
+
+    <!-- ─── 01. HERO ─────────────────────────────────────── -->
+    <section id="hero" class="hero-ph" aria-labelledby="hero-nome">
+      <!-- Grade de 3 fotos como hero -->
+      <div class="hero-ph__grid" aria-hidden="true">
+        <div class="hero-ph__cell" data-label="Casamento">
+          <div class="hero-ph__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Foto 01<br>Substituir</p>
+          </div>
+        </div>
+        <div class="hero-ph__cell" data-label="Ensaio">
+          <div class="hero-ph__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Foto 02<br>Substituir</p>
+          </div>
+        </div>
+        <div class="hero-ph__cell" data-label="Editorial">
+          <div class="hero-ph__placeholder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            <p>Foto 03<br>Substituir</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-ph__overlay" aria-hidden="true"></div>
+
+      <div class="hero-ph__content">
+        <p class="hero-ph__eyebrow reveal reveal-fade-up" aria-label="Fotógrafo e Videomaker · São Paulo">Fotógrafo · Videomaker · São Paulo</p>
+        <h1 class="hero-ph__name reveal reveal-fade-up" id="hero-nome">Felipe<br>Duarte</h1>
+        <p class="hero-ph__sub reveal reveal-fade-up anim-delay-1">Casamentos · Ensaios · Editoriais</p>
+        <div class="hero-ph__ctas reveal reveal-fade-up anim-delay-2">
+          <a href="#contato" class="btn-gold">Reservar data</a>
+          <a href="#portfolio" class="btn-outline-white">Ver portfólio</a>
+        </div>
+      </div>
+
+      <div class="scroll-hint" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-hint__line"></div>
+      </div>
+    </section>
+
+    <!-- ─── 02. PORTFÓLIO ────────────────────────────────── -->
+    <section id="portfolio" class="section-mid" aria-labelledby="port-titulo">
+      <div class="container">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:var(--space-6);margin-bottom:var(--space-10)">
+          <div>
+            <p class="eyebrow-gold">Portfólio</p>
+            <h2 style="font-size:clamp(1.75rem,4vw,3rem);font-weight:900;color:#FFFFFF;letter-spacing:-0.02em;line-height:1.05" id="port-titulo">Trabalhos recentes</h2>
+          </div>
+          <a href="#contato" class="btn-outline-white">Solicitar portfólio completo →</a>
+        </div>
+        <div class="portfolio-ph" role="list">
+          <div class="portfolio-ph__item portfolio-ph__item--wide reveal reveal-fade-up" role="listitem">
+            <div class="portfolio-ph__img" aria-hidden="true">📷</div>
+            <div class="portfolio-ph__info">
+              <p class="portfolio-ph__info-tag">Casamento</p>
+              <p class="portfolio-ph__info-title">Mariana + Lucas — Fasano Boa Vista</p>
+            </div>
+            <span class="portfolio-ph__placeholder">Substituir pela foto</span>
+          </div>
+          <div class="portfolio-ph__item portfolio-ph__item--tall reveal reveal-fade-up anim-delay-1" role="listitem">
+            <div class="portfolio-ph__img" aria-hidden="true">📷</div>
+            <div class="portfolio-ph__info">
+              <p class="portfolio-ph__info-tag">Ensaio</p>
+              <p class="portfolio-ph__info-title">Ensaio pré-wedding na Toscana</p>
+            </div>
+            <span class="portfolio-ph__placeholder">Substituir</span>
+          </div>
+          <div class="portfolio-ph__item reveal reveal-fade-up anim-delay-2" role="listitem">
+            <div class="portfolio-ph__img" aria-hidden="true">📷</div>
+            <div class="portfolio-ph__info">
+              <p class="portfolio-ph__info-tag">Editorial</p>
+              <p class="portfolio-ph__info-title">Capa Vogue Noivas Jul/23</p>
+            </div>
+            <span class="portfolio-ph__placeholder">Substituir</span>
+          </div>
+          <div class="portfolio-ph__item reveal reveal-fade-up anim-delay-3" role="listitem">
+            <div class="portfolio-ph__img" aria-hidden="true">📷</div>
+            <div class="portfolio-ph__info">
+              <p class="portfolio-ph__info-tag">Casamento</p>
+              <p class="portfolio-ph__info-title">Ana + Pedro — Sítio em Bragança</p>
+            </div>
+            <span class="portfolio-ph__placeholder">Substituir</span>
+          </div>
+          <div class="portfolio-ph__item reveal reveal-fade-up anim-delay-4" role="listitem">
+            <div class="portfolio-ph__img" aria-hidden="true">📷</div>
+            <div class="portfolio-ph__info">
+              <p class="portfolio-ph__info-tag">Família</p>
+              <p class="portfolio-ph__info-title">Ensaio família Mendes</p>
+            </div>
+            <span class="portfolio-ph__placeholder">Substituir</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 03. SERVIÇOS ─────────────────────────────────── -->
+    <section id="servicos" class="section-dark" aria-labelledby="serv-titulo">
+      <div class="container">
+        <div style="margin-bottom:var(--space-12)">
+          <p class="eyebrow-gold">Serviços</p>
+          <h2 style="font-size:clamp(1.75rem,4vw,3rem);font-weight:900;color:#FFFFFF;letter-spacing:-0.02em" id="serv-titulo">O que ofereço</h2>
+        </div>
+        <div class="servicos-ph-grid">
+          <div class="servico-ph reveal reveal-fade-up anim-delay-1 hover-lift">
+            <p class="servico-ph__num">01</p>
+            <h3 class="servico-ph__title">Casamentos</h3>
+            <p class="servico-ph__text">Documentação completa do seu dia — do making of à festa. Abordagem discreta que preserva cada emoção real sem interferir no evento.</p>
+            <ul class="servico-ph__includes">
+              <li>8 a 12 horas de cobertura</li>
+              <li>Segundo fotógrafo incluso</li>
+              <li>400 a 700 fotos editadas</li>
+              <li>Álbum de luxo opcional</li>
+              <li>Entrega em 60 dias</li>
+            </ul>
+          </div>
+          <div class="servico-ph reveal reveal-fade-up anim-delay-2 hover-lift">
+            <p class="servico-ph__num">02</p>
+            <h3 class="servico-ph__title">Ensaios</h3>
+            <p class="servico-ph__text">Pré-wedding, gestante, família, ensaio individual ou books profissionais. Em estúdio, locação ou viagem internacional.</p>
+            <ul class="servico-ph__includes">
+              <li>2 a 4 horas de sessão</li>
+              <li>Direção de poses inclusa</li>
+              <li>60 a 150 fotos editadas</li>
+              <li>Locações em SP ou viagem</li>
+              <li>Entrega em 21 dias</li>
+            </ul>
+          </div>
+          <div class="servico-ph reveal reveal-fade-up anim-delay-3 hover-lift">
+            <p class="servico-ph__num">03</p>
+            <h3 class="servico-ph__title">Vídeo e Filme</h3>
+            <p class="servico-ph__text">Filme cinematográfico do casamento ou evento — com trilha personalizada e cortes que parecem um longa-metragem, não um clipe.</p>
+            <ul class="servico-ph__includes">
+              <li>Teaser (2 min) + Filme (8–15 min)</li>
+              <li>Drone incluso nos pacotes Full</li>
+              <li>Trilha sonora licenciada</li>
+              <li>Entrega em 90 dias</li>
+              <li>Combo foto + vídeo disponível</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 04. SOBRE ────────────────────────────────────── -->
+    <section id="sobre" class="section-mid" aria-labelledby="sobre-titulo">
+      <div class="container">
+        <div class="sobre-ph__layout">
+          <div class="sobre-ph__foto" role="img" aria-label="Foto do Felipe Duarte — substituir pela foto real"></div>
+          <div>
+            <p class="eyebrow-gold">Sobre</p>
+            <h2 class="sobre-ph__title" id="sobre-titulo">A fotografia certa não registra o momento. Ela o ressuscita.</h2>
+            <p class="sobre-ph__body">
+              Com 10 anos de carreira e mais de 300 casamentos documentados, Felipe Duarte é reconhecido por uma abordagem que mistura fotojornalismo, luz natural e direção de cena discreta. Seu trabalho foi publicado nas revistas Vogue Noivas Brasil, Elle Decor e Caras.
+            </p>
+            <p class="sobre-ph__body">
+              Cada projeto começa com uma conversa honesta: o que você quer lembrar desse dia daqui a 40 anos? A resposta define cada ângulo, cada luz, cada frame escolhido na edição.
+            </p>
+            <div class="sobre-ph__stats">
+              <div>
+                <span class="stat-ph__value">300+</span>
+                <p class="stat-ph__label">Casamentos</p>
+              </div>
+              <div>
+                <span class="stat-ph__value">10</span>
+                <p class="stat-ph__label">Anos de carreira</p>
+              </div>
+              <div>
+                <span class="stat-ph__value">3</span>
+                <p class="stat-ph__label">Publicações Vogue</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 05. DEPOIMENTOS ──────────────────────────────── -->
+    <section class="section-dark" aria-labelledby="dep-titulo">
+      <div class="container">
+        <div style="margin-bottom:var(--space-12)">
+          <p class="eyebrow-gold">Clientes</p>
+          <h2 style="font-size:clamp(1.75rem,4vw,3rem);font-weight:900;color:#FFFFFF;letter-spacing:-0.02em" id="dep-titulo">O que dizem</h2>
+        </div>
+        <div class="deps-ph-grid">
+          <div class="dep-ph reveal reveal-fade-up anim-delay-1 hover-lift">
+            <div class="dep-ph__quote" aria-hidden="true">"</div>
+            <p class="dep-ph__text">Felipe fotografou nosso casamento e entregou algo que vai além das fotos — é uma narrativa. Cada imagem conta uma parte da história daquele dia. Quando vimos o álbum choramos de novo, do mesmo jeito que choramos na cerimônia.</p>
+            <div class="dep-ph__footer">
+              <div class="dep-ph__avatar" aria-hidden="true">M+L</div>
+              <div>
+                <p class="dep-ph__name">Mariana e Lucas</p>
+                <p class="dep-ph__role">Casamento · Fasano Boa Vista · 2023</p>
+              </div>
+            </div>
+          </div>
+          <div class="dep-ph reveal reveal-fade-up anim-delay-2 hover-lift">
+            <div class="dep-ph__quote" aria-hidden="true">"</div>
+            <p class="dep-ph__text">Nunca me senti tão à vontade na frente de uma câmera. O Felipe cria uma atmosfera que você esquece que está sendo fotografado — e o resultado é exatamente isso: naturalidade pura. Os meus fotos saíram na Vogue. Definitivamente o melhor investimento que fiz.</p>
+            <div class="dep-ph__footer">
+              <div class="dep-ph__avatar" aria-hidden="true">RN</div>
+              <div>
+                <p class="dep-ph__name">Renata Neves</p>
+                <p class="dep-ph__role">Editorial · Book profissional · 2022</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── 06. CTA ───────────────────────────────────────── -->
+    <section id="contato" class="cta-ph" aria-labelledby="cta-titulo">
+      <div class="container">
+        <h2 class="cta-ph__title reveal reveal-fade-up" id="cta-titulo">Sua data ainda<br>está <em>disponível.</em></h2>
+        <p class="cta-ph__sub reveal reveal-fade-up anim-delay-1">As datas de 2025 estão quase esgotadas. Reserve agora para 2026.</p>
+        <div class="cta-ph__ctas reveal reveal-fade-up anim-delay-2">
+          <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" class="btn-gold" style="font-size:var(--text-base);padding:var(--space-4) var(--space-8)">
+            Verificar disponibilidade
+          </a>
+          <a href="mailto:contato@felipeduarte.com.br" class="btn-outline-white" style="font-size:var(--text-base);padding:var(--space-4) var(--space-8)">
+            contato@felipeduarte.com.br
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer-ph" role="contentinfo">
+    <p>© 2025 Felipe Duarte Fotografia · São Paulo · <a href="tel:+5511999999999">(11) 99999-9999</a></p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
