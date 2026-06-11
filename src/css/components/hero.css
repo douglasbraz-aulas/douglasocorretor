@@ -1,0 +1,218 @@
+/* hero.css - Seção de Apresentação Principal */
+.hero {
+  background-color: var(--color-primary-dark);
+  color: var(--color-surface);
+  padding: 140px 0 var(--space-20);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito sutil de background radial para adicionar profundidade */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(circle, rgba(22, 58, 102, 0.15) 0%, rgba(5, 16, 32, 0) 70%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero__container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-12);
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Badge de destaque */
+.hero__badge {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--space-4);
+  padding: var(--space-1) var(--space-3);
+  background-color: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: var(--radius-sm);
+}
+
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-5xl);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--color-surface);
+  margin-bottom: var(--space-6);
+}
+
+.hero__title span {
+  color: var(--color-secondary); /* Destaque dourado */
+}
+
+.hero__description {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-8);
+}
+
+.hero__ctas {
+  display: flex;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* Lado Direito: Imagem com moldura estilosa */
+.hero__media {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Decoração com linhas douradas atrás da imagem */
+.hero__media::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--color-secondary);
+  border-radius: var(--radius-lg);
+  z-index: -1;
+  max-width: 450px;
+  opacity: 0.5;
+}
+
+.hero__image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  transition: var(--transition-slow);
+}
+
+.hero__image:hover {
+  transform: scale(1.03);
+}
+
+/* Floating badge de credibilidade */
+.hero__floating-card {
+  position: absolute;
+  bottom: 30px;
+  left: -20px;
+  background-color: var(--color-surface);
+  color: var(--color-primary-dark);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  border-left: 4px solid var(--color-secondary);
+  z-index: 3;
+}
+
+.hero__floating-icon {
+  font-size: var(--text-2xl);
+  color: var(--color-secondary);
+}
+
+.hero__floating-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__floating-title {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.hero__floating-sub {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .hero {
+    padding: 160px 0 var(--space-16);
+    background-image: linear-gradient(rgba(5, 16, 32, 0.35), rgba(5, 16, 32, 0.45)), url('../../assets/images/hero_building.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .hero::before {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(5, 20, 40, 0.88); /* Alta opacidade para leitura perfeita */
+  }
+
+  .hero__container {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .hero__content {
+    align-items: center;
+  }
+
+  .hero__title {
+    font-size: var(--text-4xl);
+  }
+
+  .hero__description {
+    font-size: var(--text-lg);
+    color: rgba(255, 255, 255, 0.9); /* Contraste ideal no mobile */
+  }
+
+  .hero__ctas {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero__ctas .btn {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .hero__media {
+    display: none; /* Remove a imagem duplicada e o card flutuante no mobile */
+  }
+}
